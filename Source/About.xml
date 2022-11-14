@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Yayo's Bank</name>
+  <author>YAYO, Amnabi</author>
+  <supportedVersions>
+    <li>1.2</li>
+    <li>1.3</li>
+  </supportedVersions>
+  <packageId>com.yayo.rimstocks2</packageId>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>UnlimitedHugs.HugsLib</packageId>
+      <displayName>HugsLib</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <description>- Introduce
+  
+You can request a loan from factions.
+If there is interest and cannot be paid back in time, they will attack.
+
+Factions sell a war bond.
+Bond prices change over time.
+You can use the bond to ask for help or keep it to get a item reward.
+
+
+
+- Economic incidents
+
+Loan increase due to interest
+Foreclosure bankruptcy
+Creditor raid
+
+Dividend arrival (Items arrive in drop pods every quarter)
+Delisting (When the price is less than $100)
+Bond price change depending on the success of the quest
+
+War bond rise
+War bond fall
+war bond change
+
+
+
+- What can I do with bonds?
+
+If you have a bonds, you will receive a gift of the faction every quarter.
+Request military aid.
+When the price goes up, you can make a profit by selling it.
+
+
+
+- Others
+
+RimWar linkage possible.
+
+
+</description>
+</ModMetaData>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModSyncNinjaData>
+  <ID>11ceb8f9-c7c0-410a-90e8-2e71afb3a16c</ID>
+  <ModName>Yayo's Bank (Continued)</ModName>
+  <Version>1.4.1</Version>
+  <SaveBreaking>False</SaveBreaking>
+  <Host name="Github">
+    <Owner>emipa606</Owner>
+    <Project>YayosBank</Project>
+    <AboutDir>About</AboutDir>
+    <DownloadFrom>ModSyncMainPage</DownloadFrom>
+    <Branch>master</Branch>
+  </Host>
+</ModSyncNinjaData>
+
+
+
+
+

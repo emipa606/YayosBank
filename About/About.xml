@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Yayo's Bank (Continued)</name>
+  <packageId>Mlie.YayosBank</packageId>
+  <author>YAYO, Amnabi</author>
+  <url>https://github.com/emipa606/YayosBank</url>
+  <supportedVersions>
+    <li>1.2</li>
+    <li>1.3</li>
+    <li>1.4</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>UnlimitedHugs.HugsLib</packageId>
+      <displayName>HugsLib</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+      <downloadUrl>https://github.com/UnlimitedHugs/RimworldHugsLib/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>UnlimitedHugs.HugsLib</li>
+  </loadAfter>
+  <description>[img]https://i.imgur.com/buuPQel.png[/img]
+Update of YAYO, Amnabis mod
+https://steamcommunity.com/sharedfiles/filedetails/?id=2368878128
+
+[img]https://i.imgur.com/pufA0kM.png[/img]
+
+[table]
+    [tr]
+        [td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
+        [td][url=https://github.com/emipa606/YayosBank][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+    [/tr]
+    [tr]
+        [td][img]https://i.imgur.com/WjDSfUn.png[/img][/td]
+        [td][img]https://i.imgur.com/Be8E2qJ.png[/img][/td]
+    [/tr]
+[/table]
+	
+[img]https://i.imgur.com/Z4GOv8H.png[/img]
+[h1][b]Introduce[/b][/h1]
+You can request a loan from factions.
+If there is interest and cannot be paid back in time, they will attack.
+
+Factions sell a war bond.
+Bond prices change over time.
+You can use the bond to ask for help or keep it to get a item reward.
+
+
+
+[b]- Loan for get Silver[/b]
+
+[img]https://imgur.com/QoTwb50.gif[/img]
+
+
+
+[b]- Seizure bankruptcy[/b]
+
+[img]https://imgur.com/4Hq2arD.gif[/img]
+
+
+
+[b]- War Bond[/b]
+
+[img]https://imgur.com/4VRllzh.gif[/img]
+
+
+
+[b]- Bond price graph[/b]
+
+[img]https://imgur.com/WhUg7Wv.gif[/img]
+
+
+
+
+[h1][b]Economic incidents[/b][/h1]
+Loan increase due to interest
+Seizure bankruptcy
+Creditor raid
+
+Dividend arrival (Items arrive in drop pods every quarter)
+Delisting (When the price is less than $100)
+Bond price change depending on the success of the quest
+
+War bond rise
+War bond fall
+war bond change
+
+
+[h1][b]What can I do with bonds?[/b][/h1]
+If you have a bonds, you will receive a gift of the faction every quarter.
+Request military aid.
+When the price goes up, you can make a profit by selling it.
+
+
+
+[h1][b]Help[/b][/h1]
+Loan work is possible through the Comms console.
+How to Settle Your Debt : 1. Seizure bankruptcy, 2. Destroy all bases in faction
+War bonds are sold by traders.
+Additional races, additional faction mod compatible
+
+
+
+
+[url=https://ko-fi.com/kr_yayo][img]https://i.imgur.com/d6Vx7Sj.png[/img][/url]
+I'm very erratic and I cannot update this in return for a donation.
+If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
+
+
+
+[b]Please take this mod and modify it. The source code is included.
+I'd love to see variations come out with various ideas.
+I'm a game designer, and I haven't implemented many ideas yet due to lack of time.
+If you are proficient in C# and are interested, please contact me on the rimworld discord.[/b]
+
+tag : cash, money, stock, stonk
+[img]https://i.imgur.com/PwoNOj4.png[/img]
+[list]
+[*] See if the the error persists if you just have this mod and its requirements active.
+[*] If not, try adding your other mods until it happens again.
+[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] and command Ctrl+F12
+[*] For best support, please use the Discord-channel for error-reporting.
+[*] Do not report errors by making a discussion-thread, I get no notification of that.
+[*] If you have the solution for a problem, please post it to the GitHub repository.
+[/list]</description>
+</ModMetaData>
