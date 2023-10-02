@@ -43,9 +43,9 @@ public class FactionPriceData : IExposable
     public float loadPrice(float tick)
     {
         var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
-        if (timeToPriceData.ContainsKey(unitTime))
+        if (timeToPriceData.TryGetValue(unitTime, out var price))
         {
-            return timeToPriceData[unitTime];
+            return price;
         }
 
         if (modBase.use_rimwar && FactionDef.Named(defname) != null)
@@ -72,9 +72,9 @@ public class FactionPriceData : IExposable
     public float loadTrend(float tick)
     {
         var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
-        if (timeToTrendData.ContainsKey(unitTime))
+        if (timeToTrendData.TryGetValue(unitTime, out var trend))
         {
-            return timeToTrendData[unitTime];
+            return trend;
         }
 
         if (modBase.use_rimwar && FactionDef.Named(defname) != null)

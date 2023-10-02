@@ -64,14 +64,11 @@ War bond rise
 War bond fall
 war bond change
 
-
 # **What can I do with bonds?**
 
 If you have a bonds, you will receive a gift of the faction every quarter.
 Request military aid.
 When the price goes up, you can make a profit by selling it.
-
-
 
 # **Help**
 
@@ -79,16 +76,6 @@ Loan work is possible through the Comms console.
 How to Settle Your Debt : 1. Seizure bankruptcy, 2. Destroy all bases in faction
 War bonds are sold by traders.
 Additional races, additional faction mod compatible
-
-
-
-
-https://ko-fi.com/kr_yayo]![Image](https://i.imgur.com/d6Vx7Sj.png)
-
-I'm very erratic and I cannot update this in return for a donation.
-If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
-
-
 
 **Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.
@@ -107,4 +94,7 @@ tag : cash, money, stock, stonk
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
+
+
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2888738292]![Image](https://img.shields.io/github/v/release/emipa606/YayosBank?label=latest%20version&style=plastic&color=9f1111&labelColor=black)
 

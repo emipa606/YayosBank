@@ -9,6 +9,8 @@
   </sellPrice.d>
   <dividendPer.t>Dividend factor</dividendPer.t>
   <dividendPer.d>The total value of the bond is multiplied by this value to determine the value of the dividend.</dividendPer.d>
+  <maxReward.t>Maximum dividend payout</maxReward.t>
+  <maxReward.d>Cannot get higher payout than this</maxReward.d>
   <DelistingPrice.t>Delisting price</DelistingPrice.t>
   <DelistingPrice.d>When the price of a bond falls below this price, bonds disappear.</DelistingPrice.d>
   <limitDate.t>bond date limit (Days)</limitDate.t>

@@ -48,4 +48,6 @@
   <loan.delay>Disponible après {0}</loan.delay>
   <loan.giveUp.notice1>Faillite par saisie. Toutes les dettes des factions seront effacées. En revanche, elles prendront 70% de tous vos objets.</loan.giveUp.notice1>
   <loan.giveUp.ok>Appliquer la faillite</loan.giveUp.ok>
+  <maxReward.t>Distribution maximale de dividendes</maxReward.t>
+  <maxReward.d>Impossible d'obtenir un paiement plus élevé que celui-ci</maxReward.d>
 </LanguageData>

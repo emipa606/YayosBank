@@ -48,4 +48,6 @@
   <loan.delay>在{0}之后可用</loan.delay>
   <loan.giveUp.notice1>Seizure bankruptcy （所有派别的债务都将被清除）。</loan.giveUp.notice1>
   <loan.giveUp.ok>申请破产</loan.giveUp.ok>
+  <maxReward.t>最高派息额</maxReward.t>
+  <maxReward.d>没有比这更高的赔率了</maxReward.d>
 </LanguageData>

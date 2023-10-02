@@ -13,13 +13,18 @@ namespace rimstocks;
 public static class Harmony_SomeNamespace
 {
     public const int modularTicksUnit = 60000; //하루의 길이, 하루에 두번이상 저장할시 그날 데이터 덮어씀
-    public static MethodInfo ExtraTabTranspilerCall = AccessTools.Method(typeof(Harmony_SomeNamespace), "ExtraTabFunc");
-    public static FieldInfo CurTabAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "curTab");
-    public static FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
+
+    public static readonly MethodInfo ExtraTabTranspilerCall =
+        AccessTools.Method(typeof(Harmony_SomeNamespace), "ExtraTabFunc");
+
+    public static readonly FieldInfo
+        CurTabAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "curTab");
+
+    public static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
 
     private static List<CurveMark> marks = new List<CurveMark>();
 
-    public static CustomGraphGroup customGraphGroup = new CustomGraphGroup();
+    public static readonly CustomGraphGroup customGraphGroup = new CustomGraphGroup();
 
     //WorldComponent_PriceSaveLoad.savePrice 로 가격 저장, 
     //WorldComponent_PriceSaveLoad.loadPrice 로 가격 불러오기
@@ -75,7 +80,6 @@ public static class Harmony_SomeNamespace
         GUI.BeginGroup(rect);
         var graphRect = new Rect(0f, 0f, rect.width, 450f);
         var legendRect = new Rect(0f, graphRect.yMax, rect.width - 200, rect.height - graphRect.yMax);
-        var rect2 = new Rect(0f, legendRect.yMax, rect.width, 40f);
         customGraphGroup.DrawGraph(graphRect, legendRect, ___graphSection);
         Text.Font = GameFont.Small;
         var num = (float)Core.AbsTickGame / GenDate.TicksPerDay;

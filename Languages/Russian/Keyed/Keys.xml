@@ -48,4 +48,6 @@
   <loan.delay>Доступно после {0}</loan.delay>
   <loan.giveUp.notice1>Банкротство конфискации\n\nВсе долги фракций будут очищены.\n\nВместо этого, они забирают 70% всех ваших вещей.</loan.giveUp.notice1>
   <loan.giveUp.ok>Применить банкротство</loan.giveUp.ok>
+  <maxReward.t>Максимальный размер дивидендных выплат</maxReward.t>
+  <maxReward.d>Невозможно получить более высокую выплату, чем эта</maxReward.d>
 </LanguageData>

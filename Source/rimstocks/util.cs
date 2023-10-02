@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
@@ -57,13 +58,13 @@ public static class util
             // 보상 물품 DEF 리스트 생성
             rewards.Clear();
             var ar_thingDef = new List<ThingDef>();
-            if (!f.modContentPack.PackageId.Contains("ludeon"))
+            if (!f.modContentPack?.IsOfficialMod == true)
             {
                 // 모드 팩션
                 foreach (var t in from t in DefDatabase<ThingDef>.AllDefs
                          where
                              basicThingCheck(t)
-                             && t.modContentPack is { PackageId: { } }
+                             && t.modContentPack is { PackageId: not null }
                              && t.modContentPack.PackageId == f.modContentPack.PackageId
                          select t)
                 {
@@ -81,8 +82,7 @@ public static class util
                                  where
                                      basicThingCheck(t)
                                      && t.techLevel == TechLevel.Spacer
-                                     && t.modContentPack != null
-                                     && t.modContentPack.PackageId.Contains("ludeon")
+                                     && t.modContentPack is { IsOfficialMod: true }
                                  select t)
                         {
                             ar_thingDef.Add(t);
@@ -96,8 +96,7 @@ public static class util
                                  where
                                      basicThingCheck(t)
                                      && t.techLevel == TechLevel.Industrial
-                                     && t.modContentPack != null
-                                     && t.modContentPack.PackageId.Contains("ludeon")
+                                     && t.modContentPack is { IsOfficialMod: true }
                                  select t)
                         {
                             ar_thingDef.Add(t);
@@ -109,10 +108,8 @@ public static class util
                     {
                         foreach (var t in from t in DefDatabase<ThingDef>.AllDefs
                                  where
-                                     basicThingCheck(t)
-                                     && t.techLevel == TechLevel.Medieval
-                                     && t.modContentPack != null
-                                     && t.modContentPack.PackageId.Contains("ludeon")
+                                     basicThingCheck(t) && t.techLevel == TechLevel.Medieval &&
+                                     t.modContentPack is { IsOfficialMod: true }
                                  select t)
                         {
                             ar_thingDef.Add(t);
@@ -124,10 +121,8 @@ public static class util
                     {
                         foreach (var t in from t in DefDatabase<ThingDef>.AllDefs
                                  where
-                                     basicThingCheck(t)
-                                     && t.techLevel == TechLevel.Neolithic
-                                     && t.modContentPack != null
-                                     && t.modContentPack.PackageId.Contains("ludeon")
+                                     basicThingCheck(t) && t.techLevel == TechLevel.Neolithic &&
+                                     t.modContentPack is { IsOfficialMod: true }
                                  select t)
                         {
                             ar_thingDef.Add(t);
@@ -142,8 +137,7 @@ public static class util
                     foreach (var t in from t in DefDatabase<ThingDef>.AllDefs
                              where
                                  basicThingCheck(t)
-                                 && t.modContentPack != null
-                                 && t.modContentPack.PackageId.Contains("ludeon")
+                                 && t.modContentPack is { IsOfficialMod: true }
                              select t)
                     {
                         ar_thingDef.Add(t);
@@ -156,6 +150,8 @@ public static class util
             {
                 continue;
             }
+
+            marketValue = Math.Min(marketValue, modBase.maxReward);
 
             rewards = MakeThings(marketValue, ar_thingDef, f);
 
@@ -190,7 +186,6 @@ public static class util
         //ar_tmp0.SortBy<DrugPolicyEntry, float>((Func<DrugPolicyEntry, float>)(e => (float)e.drug.techLevel + (e.drug.defName.Contains("fire") ? 0.1f : e.drug.defName.Contains("emp") ? 0.2f : 0f)));
         for (var i = 0; i < ar_def.Count && marketValue > 0; i++)
         {
-            t = null;
             var needCount = Mathf.FloorToInt(marketValue / ar_def[i].BaseMarketValue);
             var count = Mathf.Min(ar_def[i].stackLimit, needCount);
             if (ar_def[i].MadeFromStuff)
@@ -237,7 +232,7 @@ public static class util
         {
             if (t2 == null)
             {
-                ar_thing.Remove(t2);
+                ar_thing.Remove(null);
             }
             else if (t2.stackCount == 0)
             {

@@ -16,6 +16,7 @@ public class modBase : ModBase
     public static float rimwarPriceFactor;
     public static float sellPrice;
     public static float dividendPer;
+    public static float maxReward;
     public static float DelistingPrice;
     public static int limitDate;
     public static int militaryAid_cost;
@@ -26,7 +27,7 @@ public class modBase : ModBase
     public static int loanScale;
 
 
-    public static bool exist_rimWar;
+    public static readonly bool exist_rimWar;
 
     private SettingHandle<float> DelistingPrice_s;
 
@@ -40,6 +41,8 @@ public class modBase : ModBase
     private SettingHandle<float> loanPer_s;
 
     private SettingHandle<int> loanScale_s;
+
+    private SettingHandle<float> maxReward_s;
 
     private SettingHandle<int> militaryAid_cost_s;
 
@@ -105,6 +108,8 @@ public class modBase : ModBase
         sellPrice_s = Settings.GetHandle("sellPrice", "sellPrice.t".Translate(), "sellPrice.d".Translate(), 0.92f);
         dividendPer_s =
             Settings.GetHandle("dividendPer", "dividendPer.t".Translate(), "dividendPer.d".Translate(), 0.08f);
+        maxReward_s =
+            Settings.GetHandle("maxReward", "maxReward.t".Translate(), "maxReward.d".Translate(), 20000f);
         DelistingPrice_s = Settings.GetHandle("DelistingPrice", "DelistingPrice.t".Translate(),
             "DelistingPrice.d".Translate(), 100f);
 
@@ -134,6 +139,7 @@ public class modBase : ModBase
 
         sellPrice = Mathf.Clamp(sellPrice_s.Value, 0.01f, 1f);
         dividendPer = Mathf.Clamp(dividendPer_s.Value, 0f, 5f);
+        maxReward = Mathf.Clamp(maxReward_s.Value, 0f, 500000f);
         DelistingPrice = Mathf.Clamp(DelistingPrice_s.Value, 1f, 1000f);
         limitDate = limitDate_s.Value;
         militaryAid_cost = militaryAid_cost_s.Value;

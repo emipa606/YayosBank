@@ -48,4 +48,6 @@
   <loan.delay>Verfügbar nach {0}</loan.delay>
   <loan.giveUp.notice1>Pfändungskonkurs\n\n Alle Schulden der Fraktionen werden getilgt.\n\n Stattdessen nehmen sie 70% aller Ihrer Gegenstände.</loan.giveUp.notice1>
   <loan.giveUp.ok>Konkurs anmelden</loan.giveUp.ok>
+  <maxReward.t>Maximale Dividendenausschüttung</maxReward.t>
+  <maxReward.d>Höhere Auszahlungen als diese sind nicht möglich</maxReward.d>
 </LanguageData>

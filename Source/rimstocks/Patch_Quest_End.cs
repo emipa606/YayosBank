@@ -8,7 +8,7 @@ namespace rimstocks;
 [HarmonyPatch(typeof(Quest), "End")]
 internal class Patch_Quest_End
 {
-    private static void Postfix(Quest __instance, QuestEndOutcome outcome, bool sendLetter = true)
+    private static void Postfix(Quest __instance, QuestEndOutcome outcome)
     {
         FactionDef f = null;
         FactionDef f2 = null;

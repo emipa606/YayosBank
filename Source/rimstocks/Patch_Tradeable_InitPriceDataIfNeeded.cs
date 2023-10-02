@@ -7,17 +7,15 @@ namespace rimstocks;
 internal class Patch_Tradeable_InitPriceDataIfNeeded
 {
     [HarmonyPostfix]
-    private static void Postfix(Tradeable __instance)
+    private static void Postfix(Tradeable __instance, ref float ___pricePlayerBuy, ref float ___pricePlayerSell)
     {
         if (__instance.ThingDef.tradeTags == null || !__instance.ThingDef.tradeTags.Contains("warbond"))
         {
             return;
         }
 
-        Traverse.Create(__instance).Field("pricePlayerBuy").SetValue(__instance.ThingDef.BaseMarketValue);
-        Traverse.Create(__instance).Field("pricePlayerSell").SetValue(__instance.ThingDef.BaseMarketValue *
-                                                                      modBase.sellPrice *
-                                                                      (__instance.AnyThing.HitPoints /
-                                                                       (float)__instance.AnyThing.MaxHitPoints));
+        ___pricePlayerBuy = __instance.ThingDef.BaseMarketValue;
+        ___pricePlayerSell = __instance.ThingDef.BaseMarketValue * modBase.sellPrice *
+                             (__instance.AnyThing.HitPoints / (float)__instance.AnyThing.MaxHitPoints);
     }
 }

@@ -42,9 +42,9 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
     public FactionPriceData getFactionPriceDataFrom(FactionDef f)
     {
         var Key = util.factionDefNameToKey(f.defName);
-        if (factionToPriceData.ContainsKey(Key))
+        if (factionToPriceData.TryGetValue(Key, out var from))
         {
-            return factionToPriceData[Key];
+            return from;
         }
 
         var fpdn = new FactionPriceData
@@ -57,11 +57,11 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         factionToPriceData.Add(Key, fpdn);
 
         /*
-			if(t.IsPlayer)
-			{//update for player since it could be renamed
-				factionToPriceData[Key].label = t.GetCallLabel();
-			}
-			*/
+            if(t.IsPlayer)
+            {//update for player since it could be renamed
+                factionToPriceData[Key].label = t.GetCallLabel();
+            }
+            */
         return factionToPriceData[Key];
     }
 
@@ -77,11 +77,11 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
             initialized = true;
             float ticksNow = Core.AbsTickGame;
             /*
-				foreach(Faction f in Find.FactionManager.AllFactions)
-				{
-					savePrice(f, ticksNow, 0);
-				}
-				*/
+                foreach(Faction f in Find.FactionManager.AllFactions)
+                {
+                    savePrice(f, ticksNow, 0);
+                }
+                */
             foreach (var f in from f in DefDatabase<FactionDef>.AllDefs
                      where
                          Core.isWarbondFaction(f)
@@ -143,9 +143,9 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
     public FactionData getFactionData_p(Faction f)
     {
         var Key = f.GetUniqueLoadID();
-        if (ar_factionData.ContainsKey(Key))
+        if (ar_factionData.TryGetValue(Key, out var p))
         {
-            return ar_factionData[Key];
+            return p;
         }
 
         var data = new FactionData
