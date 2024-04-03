@@ -22,7 +22,7 @@ public static class Harmony_SomeNamespace
 
     public static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
 
-    private static List<CurveMark> marks = new List<CurveMark>();
+    private static List<CurveMark> marks = [];
 
     public static readonly CustomGraphGroup customGraphGroup = new CustomGraphGroup();
 

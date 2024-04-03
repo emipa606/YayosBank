@@ -4,7 +4,7 @@ using Verse;
 
 namespace rimstocks;
 
-[HarmonyPatch(typeof(FactionDialogMaker), "FactionDialogFor")]
+[HarmonyPatch(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor))]
 internal class Patch_FactionDialogMaker_FactionDialogFor
 {
     private static void Postfix(ref DiaNode __result, Pawn negotiator, Faction faction)

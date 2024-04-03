@@ -10,7 +10,7 @@ namespace rimstocks;
 
 public static class util
 {
-    private static List<Thing> rewards = new List<Thing>();
+    private static List<Thing> rewards = [];
 
 
     // 특정 채권 모두제거 (상장폐지용)
@@ -169,6 +169,8 @@ public static class util
                 MessageTypeDefOf.NeutralEvent));
         }
 
+        return;
+
         // 배당금 물품 DEF 기본 체크
         bool basicThingCheck(ThingDef t)
         {
@@ -228,7 +230,7 @@ public static class util
             ar_thing.Add(t);
         }
 
-        foreach (var t2 in ar_thing)
+        foreach (var t2 in ar_thing.ToList())
         {
             if (t2 == null)
             {
@@ -755,6 +757,8 @@ public static class util
                     t.Kill();
                 }
             }
+
+            continue;
 
 
             bool checkForKill(Thing t)

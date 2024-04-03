@@ -67,7 +67,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 
     public FactionPriceData func_289013(string Key)
     {
-        return !factionToPriceData.ContainsKey(Key) ? null : factionToPriceData[Key];
+        return factionToPriceData.GetValueOrDefault(Key);
     }
 
     public override void FinalizeInit()

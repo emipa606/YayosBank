@@ -7,7 +7,7 @@ namespace rimstocks;
 
 public class CustomGraphGroup
 {
-    private readonly List<SimpleCurveDrawInfo> curves = new List<SimpleCurveDrawInfo>();
+    private readonly List<SimpleCurveDrawInfo> curves = [];
     private int cachedGraphTickCount = -1;
 
     public void DrawGraph(Rect graphRect, Rect legendRect, FloatRange section)
@@ -36,7 +36,7 @@ public class CustomGraphGroup
                 {
                     color = rs.color,
                     label = rs.label,
-                    curve = new SimpleCurve()
+                    curve = []
                 };
                 foreach (var kvp in rs.timeToPriceData)
                 {

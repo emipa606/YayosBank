@@ -8,7 +8,7 @@ namespace rimstocks;
 internal class Patch_Thing_TryAbsorbStack
 {
     [HarmonyPostfix]
-    public static bool Prefix(Thing __instance, ref bool __result, Thing other, bool respectStackLimit)
+    public static bool Prefix(Thing __instance, Thing other, bool respectStackLimit)
     {
         var cp = __instance.TryGetComp<CompLifespan>();
         if (cp == null)

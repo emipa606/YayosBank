@@ -8,7 +8,7 @@ using Verse;
 
 namespace rimstocks;
 
-public class Core : MapComponent
+public class Core(Map map) : MapComponent(map)
 {
     public enum en_graphStyle
     {
@@ -17,19 +17,15 @@ public class Core : MapComponent
         big
     }
 
-    public static readonly List<ThingDef> ar_warbondDef = new List<ThingDef>();
-    public static readonly List<FactionDef> ar_faction = new List<FactionDef>();
-    public static readonly List<en_graphStyle> ar_graphStyle = new List<en_graphStyle>();
+    public static readonly List<ThingDef> ar_warbondDef = [];
+    public static readonly List<FactionDef> ar_faction = [];
+    public static readonly List<en_graphStyle> ar_graphStyle = [];
 
     public static readonly float basicPrice = 500f;
     private readonly float maxPrice = 10000f;
 
     private readonly float minPrice = 1f;
 
-
-    public Core(Map map) : base(map)
-    {
-    }
 
     public static int AbsTickGame => Find.TickManager.TicksGame + (GenDate.GameStartHourOfDay * GenDate.TicksPerHour);
 
@@ -464,11 +460,6 @@ public class Core : MapComponent
         int index;
         float change;
 
-        void resetChangeScale()
-        {
-            changeScale = Rand.Range(0.10f, 0.25f);
-        }
-
 
         if (modBase.use_rimwar)
         {
@@ -668,6 +659,12 @@ public class Core : MapComponent
         prev = WorldComponent_PriceSaveLoad.loadPrice(f2, targetTime);
         WorldComponent_PriceSaveLoad.savePrice(f2, targetTime, change * prev);
         ar_warbondDef[index].SetStatBaseValue(StatDefOf.MarketValue, change * prev);
+        return;
+
+        void resetChangeScale()
+        {
+            changeScale = Rand.Range(0.10f, 0.25f);
+        }
     }
 
 
@@ -687,7 +684,7 @@ public class Core : MapComponent
                 resourceReadoutPriority = ResourceCountPriority.Middle,
                 selectable = true,
                 altitudeLayer = AltitudeLayer.Item,
-                comps = new List<CompProperties> { new CompProperties_Forbiddable() },
+                comps = [new CompProperties_Forbiddable()],
                 alwaysHaulable = true,
                 drawGUIOverlay = true,
                 rotatable = false,
@@ -712,7 +709,7 @@ public class Core : MapComponent
             t.soundDrop = SoundDef.Named("Silver_Drop");
 
             t.healthAffectsPrice = true;
-            t.statBases = new List<StatModifier>();
+            t.statBases = [];
 
 
             t.useHitPoints = true;
@@ -722,7 +719,7 @@ public class Core : MapComponent
             t.SetStatBaseValue(StatDefOf.MarketValue, basicPrice);
             t.SetStatBaseValue(StatDefOf.Mass, 0.008f);
 
-            t.thingCategories = new List<ThingCategoryDef>();
+            t.thingCategories = [];
 
             t.stackLimit = 999;
 
@@ -738,7 +735,7 @@ public class Core : MapComponent
 
             t.tradeability = Tradeability.All;
 
-            t.tradeTags = new List<string> { "warbond" };
+            t.tradeTags = ["warbond"];
 
             t.tickerType = TickerType.Rare;
 
