@@ -11,13 +11,13 @@ public class harmonyPatch_core : Mod
         harmony.Patch(
             AccessTools.Method(typeof(DefGenerator), "GenerateImpliedDefs_PreResolve"),
             null,
-            new HarmonyMethod(typeof(rimstocks.harmonyPatch_core), nameof(rimstocks.harmonyPatch_core.Patch_DefGenerator_GenerateImpliedDefs_PreResolve))
+            new HarmonyMethod(typeof(rimstocks.harmonyPatch_core), nameof(rimstocks.harmonyPatch_core.DefGenerator_GenerateImpliedDefs_PreResolve))
         );
         */
         new Harmony("yayo.rimstocks.1").PatchAll();
     }
     /*
-    static public void Patch_DefGenerator_GenerateImpliedDefs_PreResolve()
+    static public void DefGenerator_GenerateImpliedDefs_PreResolve()
     {
         rimstocks.Core.patchDef();
     }

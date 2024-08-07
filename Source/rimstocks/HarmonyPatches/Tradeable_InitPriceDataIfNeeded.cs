@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using RimWorld;
 
-namespace rimstocks;
+namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(Tradeable), "InitPriceDataIfNeeded")]
-internal class Patch_Tradeable_InitPriceDataIfNeeded
+internal class Tradeable_InitPriceDataIfNeeded
 {
     [HarmonyPostfix]
     private static void Postfix(Tradeable __instance, ref float ___pricePlayerBuy, ref float ___pricePlayerSell)

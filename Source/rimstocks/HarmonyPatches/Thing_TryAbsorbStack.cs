@@ -2,10 +2,10 @@
 using UnityEngine;
 using Verse;
 
-namespace rimstocks;
+namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(Thing), nameof(Thing.TryAbsorbStack))]
-internal class Patch_Thing_TryAbsorbStack
+internal class Thing_TryAbsorbStack
 {
     [HarmonyPostfix]
     public static bool Prefix(Thing __instance, Thing other, bool respectStackLimit)

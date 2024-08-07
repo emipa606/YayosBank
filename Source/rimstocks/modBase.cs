@@ -11,6 +11,7 @@ namespace rimstocks;
 public class modBase : ModBase
 {
     public static bool useEnemyFaction;
+    public static int ExtraHistoryTabIndex = 3;
     public static bool useVanillaEnemyFaction;
     public static bool rimwarLink;
     public static float rimwarPriceFactor;
@@ -67,6 +68,11 @@ public class modBase : ModBase
         if (ModsConfig.ActiveModsInLoadOrder.Any(mod => mod.PackageId.ToLower().Contains("Torann.RimWar".ToLower())))
         {
             exist_rimWar = true;
+        }
+
+        if (ModsConfig.IsActive("WealthList.ui.tmpfix"))
+        {
+            ExtraHistoryTabIndex = 4;
         }
     }
 

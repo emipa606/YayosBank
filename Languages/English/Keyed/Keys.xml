@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <rimwarLink.t>RimWar linkage</rimwarLink.t>
   <rimwarLink.d>It only works if you use RimWar together. Bond prices fluctuate according to the power of the RimWar system.</rimwarLink.d>
@@ -47,7 +47,7 @@
   <loan.contract>Contract\n\nType : Credit loan\nInterest : Instant interest accrued once, {0}% / 15days (compound)\nExpiration : {1} left\n\nCaution - Failure to repay loans and interest within the due date is considered hostile and will be attacked indefinitely.\n\nThe amount owed : {2}</loan.contract>
   <loan.get>Loan : {0}</loan.get>
   <loan.replay>Pay off : {0}</loan.replay>
-  <loan.notice.interest>Interest on loan of {0} - {1}x{2} =&gt; {1}x{3}, left days : {4}</loan.notice.interest>
+  <loan.notice.interest>Interest on loan of {0} - {1}x{2} => {1}x{3}, left days : {4}</loan.notice.interest>
   <loan.notice.leftDay>{0}'s dunning letter - {1}x{2}, left days : {3}. If you cannot pay off your debt, file for seizure bankruptcy.</loan.notice.leftDay>
   <loan.notice.raid>{0}'s dunning letter - If you cannot pay off your debt, file for seizure bankruptcy. We will send more and more troops.</loan.notice.raid>
   <loan.giveUp>Seizure bankruptcy (all debts are cleared)</loan.giveUp>

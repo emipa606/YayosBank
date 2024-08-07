@@ -2,10 +2,10 @@
 using RimWorld;
 using Verse;
 
-namespace rimstocks;
+namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor))]
-internal class Patch_FactionDialogMaker_FactionDialogFor
+internal class FactionDialogMaker_FactionDialogFor
 {
     private static void Postfix(ref DiaNode __result, Pawn negotiator, Faction faction)
     {

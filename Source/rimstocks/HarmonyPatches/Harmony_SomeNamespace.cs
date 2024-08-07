@@ -7,7 +7,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace rimstocks;
+namespace rimstocks.HarmonyPatches;
 
 [StaticConstructorOnStartup]
 public static class Harmony_SomeNamespace
@@ -15,38 +15,33 @@ public static class Harmony_SomeNamespace
     public const int modularTicksUnit = 60000; //하루의 길이, 하루에 두번이상 저장할시 그날 데이터 덮어씀
 
     public static readonly MethodInfo ExtraTabTranspilerCall =
-        AccessTools.Method(typeof(Harmony_SomeNamespace), "ExtraTabFunc");
+        AccessTools.Method(typeof(Harmony_SomeNamespace), nameof(ExtraTabFunc));
 
     public static readonly FieldInfo
         CurTabAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "curTab");
 
     public static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
 
-    private static List<CurveMark> marks = [];
-
     public static readonly CustomGraphGroup customGraphGroup = new CustomGraphGroup();
-
-    //WorldComponent_PriceSaveLoad.savePrice 로 가격 저장, 
-    //WorldComponent_PriceSaveLoad.loadPrice 로 가격 불러오기
 
     static Harmony_SomeNamespace()
     {
         var harmony = new Harmony("yayo.rimstocks.2");
 
         harmony.Patch(
-            AccessTools.Method(typeof(MainTabWindow_History), "PreOpen"),
+            AccessTools.Method(typeof(MainTabWindow_History), nameof(MainTabWindow_History.PreOpen)),
             null,
             new HarmonyMethod(typeof(Harmony_SomeNamespace), nameof(patch_preOpen1))
         );
         harmony.Patch(
-            AccessTools.Method(typeof(MainTabWindow_History), "PreOpen"),
+            AccessTools.Method(typeof(MainTabWindow_History), nameof(MainTabWindow_History.PreOpen)),
             null,
             null,
             new HarmonyMethod(typeof(Harmony_SomeNamespace), nameof(graphTranspiler))
         );
 
         harmony.Patch(
-            AccessTools.Method(typeof(MainTabWindow_History), "DoWindowContents"),
+            AccessTools.Method(typeof(MainTabWindow_History), nameof(MainTabWindow_History.DoWindowContents)),
             null,
             new HarmonyMethod(typeof(Harmony_SomeNamespace), nameof(DoWindowContentsPostFix))
         );
@@ -62,15 +57,15 @@ public static class Harmony_SomeNamespace
         list.Add(new TabRecord("warbond_graphTitle".Translate(),
             delegate
             {
-                CurTabAccessor.SetValue(null, (byte)3, BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == 3));
-        CurTabAccessor.SetValue(null, (byte)3, BindingFlags.NonPublic | BindingFlags.Static, null, null);
+                CurTabAccessor.SetValue(null, (byte)modBase.ExtraHistoryTabIndex,
+                    BindingFlags.NonPublic | BindingFlags.Static, null, null);
+            }, () => (byte)CurTabAccessor.GetValue(null) == modBase.ExtraHistoryTabIndex));
+        //CurTabAccessor.SetValue(null, (byte)modBase.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
     }
 
-    public static void DoWindowContentsPostFix(Rect rect, HistoryAutoRecorderGroup ___historyAutoRecorderGroup,
-        ref FloatRange ___graphSection)
+    public static void DoWindowContentsPostFix(Rect rect, ref FloatRange ___graphSection)
     {
-        if ((byte)CurTabAccessor.GetValue(null) != 3)
+        if ((byte)CurTabAccessor.GetValue(null) != modBase.ExtraHistoryTabIndex)
         {
             return;
         }
@@ -120,8 +115,7 @@ public static class Harmony_SomeNamespace
         ___graphSection = new FloatRange(Mathf.Max(0f, num - 30f), num);
     }
 
-    public static IEnumerable<CodeInstruction> graphTranspiler(ILGenerator generator,
-        IEnumerable<CodeInstruction> instructions)
+    public static IEnumerable<CodeInstruction> graphTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         var callVirt4 = 0;
         var nopStack = 0;

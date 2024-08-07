@@ -2,11 +2,11 @@
 using HarmonyLib;
 using RimWorld;
 
-namespace rimstocks;
+namespace rimstocks.HarmonyPatches;
 
 // 퀘스트 완료 시 주가변동
 [HarmonyPatch(typeof(Quest), nameof(Quest.End))]
-internal class Patch_Quest_End
+internal class Quest_End
 {
     private static void Postfix(Quest __instance, QuestEndOutcome outcome)
     {

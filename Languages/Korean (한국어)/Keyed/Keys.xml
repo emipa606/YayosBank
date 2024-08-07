@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <rimwarLink.t>림워 연동</rimwarLink.t>
   <rimwarLink.d>림워를 같이 사용할 경우에만 작동합니다. 림워 시스템의 세력의 힘에 따라서 채권가격이 변동됩니다.</rimwarLink.d>
@@ -45,7 +45,7 @@
   <loan.contract>계약서\n\n상품 : 신용대출\n이자 : 즉시 이자 1회 발생, {0}% / 15일 (복리)\n만기일 : {1} 남음\n\n주의 - 기한 내 대출금과 이자를 상환하지 못할 시, 적대행위로 간주하여 무기한 습격 예정.\n\n갚아야할 금액 : {2}</loan.contract>
   <loan.get>대출하기 : {0}</loan.get>
   <loan.replay>빚갚기 : {0}</loan.replay>
-  <loan.notice.interest>{0}의 대출금 이자 - {1}x{2} =&gt; {1}x{3}, 남은기간 : {4}</loan.notice.interest>
+  <loan.notice.interest>{0}의 대출금 이자 - {1}x{2} => {1}x{3}, 남은기간 : {4}</loan.notice.interest>
   <loan.notice.leftDay>{0}의 독촉장 - {1}x{2}, 남은기간 : {3}. 빚을 못 갚겠다면, 가압류 파산신청을 하십시오.</loan.notice.leftDay>
   <loan.notice.raid>{0}의 독촉장 - 빚을 못 갚겠다면, 가압류 파산신청을 하십시오. 점점 더 많은 병력을 보낼 것 입니다.</loan.notice.raid>
   <loan.giveUp>가압류 파산 (모든 빚이 청산됩니다)</loan.giveUp>
