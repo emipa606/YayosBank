@@ -14,15 +14,15 @@ public static class Harmony_SomeNamespace
 {
     public const int modularTicksUnit = 60000; //하루의 길이, 하루에 두번이상 저장할시 그날 데이터 덮어씀
 
-    public static readonly MethodInfo ExtraTabTranspilerCall =
+    private static readonly MethodInfo ExtraTabTranspilerCall =
         AccessTools.Method(typeof(Harmony_SomeNamespace), nameof(ExtraTabFunc));
 
-    public static readonly FieldInfo
+    private static readonly FieldInfo
         CurTabAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "curTab");
 
-    public static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
+    private static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
 
-    public static readonly CustomGraphGroup customGraphGroup = new CustomGraphGroup();
+    private static readonly CustomGraphGroup customGraphGroup = new();
 
     static Harmony_SomeNamespace()
     {

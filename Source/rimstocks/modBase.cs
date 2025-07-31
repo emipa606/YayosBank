@@ -13,7 +13,7 @@ public class modBase : ModBase
     public static bool useEnemyFaction;
     public static int ExtraHistoryTabIndex = 3;
     public static bool useVanillaEnemyFaction;
-    public static bool rimwarLink;
+    private static bool rimwarLink;
     public static float rimwarPriceFactor;
     public static float sellPrice;
     public static float dividendPer;
@@ -28,7 +28,7 @@ public class modBase : ModBase
     public static int loanScale;
 
 
-    public static readonly bool exist_rimWar;
+    private static readonly bool exist_rimWar;
 
     private SettingHandle<float> DelistingPrice_s;
 
@@ -90,7 +90,7 @@ public class modBase : ModBase
         setupOption2();
     }
 
-    public void setupOption()
+    private void setupOption()
     {
         useEnemyFaction_s = Settings.GetHandle<bool>("useEnemyFaction", "Mods Enemy Faction (Restart)",
             "(Need Restart Game)\nMods Enemy faction use warbond");
@@ -105,7 +105,7 @@ public class modBase : ModBase
         limitDate = limitDate_s.Value;
     }
 
-    public void setupOption2()
+    private void setupOption2()
     {
         rimwarLink_s = Settings.GetHandle("rimwarLink", "rimwarLink.t".Translate(), "rimwarLink.d".Translate(), true);
         rimwarPriceFactor_s = Settings.GetHandle("rimwarPriceFactor", "rimwarPriceFactor.t".Translate(),

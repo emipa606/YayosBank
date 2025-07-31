@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Rapid economic change -->
+  <rs_warbond_change.label>Rapid economic change</rs_warbond_change.label>
+  <!-- EN: The prices of all bonds will fluctuate rapidly over the next few days. -->
+  <rs_warbond_change.description>The prices of all bonds will fluctuate rapidly over the next few days.</rs_warbond_change.description>
+  <!-- EN: The Rapid economic change is ending. -->
+  <rs_warbond_change.endMessage>The Rapid economic change is ending.</rs_warbond_change.endMessage>
+  <!-- EN: The prices of all bonds will fluctuate rapidly over the next few days. -->
+  <rs_warbond_change.letterText>The prices of all bonds will fluctuate rapidly over the next few days.</rs_warbond_change.letterText>
+  <!-- EN: economic crisis -->
+  <rs_warbond_fall.label>economic crisis</rs_warbond_fall.label>
+  <!-- EN: Over the next few days, the overall price of bonds will decline.\nHowever, for some, the price may rise in reverse. -->
+  <rs_warbond_fall.description>Over the next few days, the overall price of bonds will decline.
+However, for some, the price may rise in reverse.</rs_warbond_fall.description>
+  <!-- EN: The economic crisis is ending. -->
+  <rs_warbond_fall.endMessage>The economic crisis is ending.</rs_warbond_fall.endMessage>
+  <!-- EN: Over the next few days, the overall price of bonds will decline.\nHowever, for some, the price may rise in reverse. -->
+  <rs_warbond_fall.letterText>Over the next few days, the overall price of bonds will decline.
+However, for some, the price may rise in reverse.</rs_warbond_fall.letterText>
+  <!-- EN: economic boom -->
+  <rs_warbond_rise.label>economic boom</rs_warbond_rise.label>
+  <!-- EN: Over the next few days, the overall price of bonds will increase.\nHowever, for some, the price may decline in reverse. -->
+  <rs_warbond_rise.description>Over the next few days, the overall price of bonds will increase.
+However, for some, the price may decline in reverse.</rs_warbond_rise.description>
+  <!-- EN: The economic boom is ending. -->
+  <rs_warbond_rise.endMessage>The economic boom is ending.</rs_warbond_rise.endMessage>
+  <!-- EN: Over the next few days, the overall price of bonds will increase.\nHowever, for some, the price may decline in reverse. -->
+  <rs_warbond_rise.letterText>Over the next few days, the overall price of bonds will increase.
+However, for some, the price may decline in reverse.</rs_warbond_rise.letterText>
+</LanguageData>

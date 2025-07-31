@@ -10,18 +10,11 @@ namespace rimstocks;
 
 public class Core(Map map) : MapComponent(map)
 {
-    public enum en_graphStyle
-    {
-        small,
-        normal,
-        big
-    }
-
     public static readonly List<ThingDef> ar_warbondDef = [];
     public static readonly List<FactionDef> ar_faction = [];
-    public static readonly List<en_graphStyle> ar_graphStyle = [];
+    private static readonly List<en_graphStyle> ar_graphStyle = [];
 
-    public static readonly float basicPrice = 500f;
+    private static readonly float basicPrice = 500f;
     private readonly float maxPrice = 10000f;
 
     private readonly float minPrice = 1f;
@@ -319,12 +312,6 @@ public class Core(Map map) : MapComponent(map)
 
                             break;
                         default:
-                            if (slope < 1f && Rand.Chance(Mathf.Clamp((400f - prevTrend) / 400f * 0.015f, 0f, 1f)))
-                            {
-                                slope *= Rand.Range(1.05f, 1.1f);
-                            }
-
-                            break;
                         case en_graphStyle.big:
                             if (slope < 1f && Rand.Chance(Mathf.Clamp((400f - prevTrend) / 400f * 0.015f, 0f, 1f)))
                             {
@@ -837,7 +824,7 @@ public class Core(Map map) : MapComponent(map)
         }
     }
 
-    public static void changeRimwarAllFactionPower(FloatRange changeScaleRange, float increasePer)
+    private static void changeRimwarAllFactionPower(FloatRange changeScaleRange, float increasePer)
     {
         if (!modBase.use_rimwar)
         {
@@ -905,7 +892,7 @@ public class Core(Map map) : MapComponent(map)
         return price;
     }
 
-    public static float getRimwarPrice(Faction f)
+    private static float getRimwarPrice(Faction f)
     {
         var price = -1f;
         if (!modBase.use_rimwar)
@@ -930,5 +917,12 @@ public class Core(Map map) : MapComponent(map)
         }
 
         return price;
+    }
+
+    private enum en_graphStyle
+    {
+        small,
+        normal,
+        big
     }
 }

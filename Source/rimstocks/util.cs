@@ -629,7 +629,7 @@ public static class util
 
 
     // 가압류 파산
-    public static void clearAllLoan()
+    private static void clearAllLoan()
     {
         foreach (var f in Find.FactionManager.AllFactions)
         {

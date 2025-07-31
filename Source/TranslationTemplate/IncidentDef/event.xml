@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Rapid economic change -->
+  <rs_warbond_change.label>Rapid economic change</rs_warbond_change.label>
+  <!-- EN: Rapid economic change -->
+  <rs_warbond_change.letterLabel>Rapid economic change</rs_warbond_change.letterLabel>
+  <!-- EN: economic crisis -->
+  <rs_warbond_fall.label>economic crisis</rs_warbond_fall.label>
+  <!-- EN: economic crisis -->
+  <rs_warbond_fall.letterLabel>economic crisis</rs_warbond_fall.letterLabel>
+  <!-- EN: economic boom -->
+  <rs_warbond_rise.label>economic boom</rs_warbond_rise.label>
+  <!-- EN: economic boom -->
+  <rs_warbond_rise.letterLabel>economic boom</rs_warbond_rise.letterLabel>
+</LanguageData>

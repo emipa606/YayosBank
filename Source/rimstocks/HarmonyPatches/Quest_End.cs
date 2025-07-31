@@ -63,11 +63,7 @@ internal class Quest_End
                 Core.OnQuestResult(f, f2, false, __instance.points);
                 break;
             case QuestEndOutcome.Success:
-                Core.OnQuestResult(f, f2, true, __instance.points);
-                break;
             case QuestEndOutcome.InvalidPreAcceptance:
-                Core.OnQuestResult(f, f2, true, __instance.points);
-                break;
             case QuestEndOutcome.Unknown:
                 Core.OnQuestResult(f, f2, true, __instance.points);
                 break;

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputPath>..\..\1.4\Assemblies</OutputPath>
+    <OutputPath>..\..\1.5\Assemblies</OutputPath>
     <TargetFramework>net48</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.4.2</FileVersion>
+    <FileVersion>1.5.1</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
@@ -23,7 +23,7 @@
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <Reference Include="RimWar">
-      <HintPath>..\..\..\..\..\..\workshop\content\294100\2222935097\v1.4\Assemblies\RimWar.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\2222935097\v1.5\Assemblies\RimWar.dll</HintPath>
       <CopyLocal>False</CopyLocal>
       <Private>false</Private>
     </Reference>

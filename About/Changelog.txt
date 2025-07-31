@@ -1,5 +1,8 @@
 # Changelog for YayosBank
 
+1.6.0 - Mod updated for 1.6 and passed autotests
+
+
 1.5.1 - Fixed compatibility with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3246503293]WealthList 1.5 From VUIE[/ul]
 
 

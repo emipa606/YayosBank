@@ -10,9 +10,9 @@ namespace rimstocks;
 public class WorldComponent_PriceSaveLoad : WorldComponent
 {
     public static WorldComponent_PriceSaveLoad staticInstance;
-    public Dictionary<string, FactionData> ar_factionData = new Dictionary<string, FactionData>();
-    public Dictionary<string, FactionPriceData> factionToPriceData = new Dictionary<string, FactionPriceData>();
-    public bool initialized;
+    private Dictionary<string, FactionData> ar_factionData = new();
+    public Dictionary<string, FactionPriceData> factionToPriceData = new();
+    private bool initialized;
 
     public WorldComponent_PriceSaveLoad(World world) : base(world)
     {
@@ -39,7 +39,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         return staticInstance.getFactionPriceDataFrom(faction).loadTrend(tick);
     }
 
-    public FactionPriceData getFactionPriceDataFrom(FactionDef f)
+    private FactionPriceData getFactionPriceDataFrom(FactionDef f)
     {
         var Key = util.factionDefNameToKey(f.defName);
         if (factionToPriceData.TryGetValue(Key, out var from))
@@ -70,7 +70,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         return factionToPriceData.GetValueOrDefault(Key);
     }
 
-    public override void FinalizeInit()
+    public override void FinalizeInit(bool fromLoad)
     {
         if (!initialized)
         {
@@ -140,7 +140,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         return staticInstance.getFactionData_p(f);
     }
 
-    public FactionData getFactionData_p(Faction f)
+    private FactionData getFactionData_p(Faction f)
     {
         var Key = f.GetUniqueLoadID();
         if (ar_factionData.TryGetValue(Key, out var p))
