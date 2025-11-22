@@ -13,7 +13,7 @@ internal class FactionDialogMaker_FactionDialogFor
         // 대출
         if ((int)faction.def.techLevel >= 4)
         {
-            opt = util.RequestLoan(negotiator.Map, faction, negotiator);
+            opt = Util.RequestLoan(negotiator.Map, faction, negotiator);
             if (negotiator.skills.GetSkill(SkillDefOf.Social).TotallyDisabled)
             {
                 opt.Disable("WorkTypeDisablesOption".Translate(SkillDefOf.Social.label));
@@ -21,7 +21,7 @@ internal class FactionDialogMaker_FactionDialogFor
 
             __result.options.Insert(__result.options.Count - 1, opt);
 
-            opt = util.RequestLoanGiveUp(negotiator.Map, faction, negotiator);
+            opt = Util.RequestLoanGiveUp(negotiator.Map, faction, negotiator);
             if (negotiator.skills.GetSkill(SkillDefOf.Social).TotallyDisabled)
             {
                 opt.Disable("WorkTypeDisablesOption".Translate(SkillDefOf.Social.label));
@@ -37,7 +37,7 @@ internal class FactionDialogMaker_FactionDialogFor
             return;
         }
 
-        opt = util.RequestMilitaryAidOptionWarbond(negotiator.Map, faction, negotiator);
+        opt = Util.RequestMilitaryAidOptionWarbond(negotiator.Map, faction, negotiator);
         if (negotiator.skills.GetSkill(SkillDefOf.Social).TotallyDisabled)
         {
             opt.Disable("WorkTypeDisablesOption".Translate(SkillDefOf.Social.label));
