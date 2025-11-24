@@ -8,7 +8,7 @@ using Verse;
 
 namespace rimstocks;
 
-public static class util
+public static class Util
 {
     private static List<Thing> rewards = [];
 
@@ -49,7 +49,7 @@ public static class util
         {
             // 보상 가격 규모 설정
             var bondCount = AmountWarbondForDividend(m, warbondDef);
-            var marketValue = bondCount * warbondDef.BaseMarketValue * modBase.dividendPer;
+            var marketValue = bondCount * warbondDef.BaseMarketValue * RimstocksMod.dividendPer;
 
 
             var intVec = DropCellFinder.TradeDropSpot(m);
@@ -151,7 +151,7 @@ public static class util
                 continue;
             }
 
-            marketValue = Math.Min(marketValue, modBase.maxReward);
+            marketValue = Math.Min(marketValue, RimstocksMod.maxReward);
 
             rewards = MakeThings(marketValue, ar_thingDef, f);
 
@@ -348,9 +348,9 @@ public static class util
     // 통신기 메뉴 - 대출
     public static DiaOption RequestLoan(Map map, Faction faction, Pawn negotiator)
     {
-        var amount = modBase.loanScale;
-        var loan_per = modBase.loanPer;
-        var loan_totalTick = modBase.loanDate * GenDate.TicksPerDay;
+        var amount = RimstocksMod.loanScale;
+        var loan_per = RimstocksMod.loanPer;
+        var loan_totalTick = RimstocksMod.loanDate * GenDate.TicksPerDay;
         var loan_targetTick = loan_totalTick + Find.TickManager.TicksGame;
         var data = WorldComponent_PriceSaveLoad.getFactionData(faction);
         var str_leftDate =
@@ -509,9 +509,9 @@ public static class util
     {
         var warbondDef = ThingDef.Named($"yy_warbond_{faction.def.defName}");
 
-        string text = "warbond.requestMilitaryAid".Translate(modBase.militaryAid_cost, warbondDef.label);
+        string text = "warbond.requestMilitaryAid".Translate(RimstocksMod.militaryAid_cost, warbondDef.label);
 
-        if (AmountSendableWarbond(map, warbondDef) < modBase.militaryAid_cost)
+        if (AmountSendableWarbond(map, warbondDef) < RimstocksMod.militaryAid_cost)
         {
             var diaOption = new DiaOption(text);
             diaOption.Disable("warbond.noCost".Translate());
@@ -591,13 +591,13 @@ public static class util
 
     private static void CallForAidWarBond(Map map, Faction faction, ThingDef warbondDef)
     {
-        TradeUtility.LaunchThingsOfType(warbondDef, modBase.militaryAid_cost, map, null);
+        TradeUtility.LaunchThingsOfType(warbondDef, RimstocksMod.militaryAid_cost, map, null);
         var incidentParms = new IncidentParms
         {
             target = map,
             faction = faction,
             raidArrivalModeForQuickMilitaryAid = true,
-            points = warbondDef.BaseMarketValue * modBase.militaryAid_multiply * 2f
+            points = warbondDef.BaseMarketValue * RimstocksMod.militaryAid_multiply * 2f
         };
 
         if (faction.PlayerRelationKind == FactionRelationKind.Hostile)

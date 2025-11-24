@@ -41,7 +41,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 
     private FactionPriceData getFactionPriceDataFrom(FactionDef f)
     {
-        var Key = util.factionDefNameToKey(f.defName);
+        var Key = Util.factionDefNameToKey(f.defName);
         if (factionToPriceData.TryGetValue(Key, out var from))
         {
             return from;
@@ -75,6 +75,11 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         if (!initialized)
         {
             initialized = true;
+
+            //HugsLib per map stuff
+            DoMapLoaded();
+
+
             float ticksNow = Core.AbsTickGame;
             /*
                 foreach(Faction f in Find.FactionManager.AllFactions)
@@ -87,7 +92,7 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
                          Core.isWarbondFaction(f)
                      select f)
             {
-                if (modBase.use_rimwar)
+                if (RimstocksMod.use_rimwar)
                 {
                     savePrice(f, ticksNow, Core.getRimwarPriceByDef(f));
                 }
@@ -105,18 +110,31 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         {
             foreach (var f in Core.ar_faction)
             {
-                var key = util.factionDefNameToKey(f.defName);
+                var key = Util.factionDefNameToKey(f.defName);
                 if (!staticInstance.factionToPriceData.Keys.Contains(key))
                 {
                     continue;
                 }
 
                 var rs = staticInstance.func_289013(key);
-                rs.defname = util.keyToFactionDefName(key);
+                rs.defname = Util.keyToFactionDefName(key);
             }
         }
     }
 
+    //From HugsLib conversion
+    private void DoMapLoaded()
+    {
+        // replicate MapLoaded logic
+        // "마지막 채권가격 불러오기, 아이템 가격에 적용"
+        if (Core.ar_warbondDef == null) return;
+        for (var i = 0; i < Core.ar_warbondDef.Count; i++)
+        {
+            var f = Core.ar_faction[i];
+            var lastPrice = WorldComponent_PriceSaveLoad.loadPrice(f, Core.AbsTickGame);
+            Core.ar_warbondDef[i].SetStatBaseValue(StatDefOf.MarketValue, lastPrice);
+        }
+    }
     public override void ExposeData()
     {
         Scribe_Values.Look(ref initialized, "initialized");
