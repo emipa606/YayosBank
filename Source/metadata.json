@@ -7,9 +7,9 @@
   "Patches": true,
   "Defs": true,
   "Assemblies": true,
-  "LinesOfCode": 96096,
-  "LinesOfXML": 4020,
+  "LinesOfCode": 108666,
+  "LinesOfXML": 4588,
   "CodeBaseSize": 79,
-  "LastXmlCleaning": "2025-07-31T21:07:58.5441409+02:00",
+  "LastXmlCleaning": "2025-11-24T20:06:17.1809228+01:00",
   "SearchTags": " economics"
 }

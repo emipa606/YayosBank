@@ -50,4 +50,10 @@
   <loan.giveUp.ok>Konkurs anmelden</loan.giveUp.ok>
   <maxReward.t>Maximale Dividendenausschüttung</maxReward.t>
   <maxReward.d>Höhere Auszahlungen als diese sind nicht möglich</maxReward.d>
+  <YayosBank_ModName>Yayo's Bank</YayosBank_ModName>
+  <YayosBank_useEnemyFaction>Modded feindlichen Fraktionen verwenden warbond</YayosBank_useEnemyFaction>
+  <YayosBank_useVanillaEnemyFaction>Vanilla feindliche Fraktionen verwenden warbond</YayosBank_useVanillaEnemyFaction>
+  <YayosBank_RequiresRestart>(Erfordert Neustart)</YayosBank_RequiresRestart>
+  <YayosBank_CurrentModVersion>Installierte Mod-Version: {0}</YayosBank_CurrentModVersion>
+  <YayosBank_ResetYayosBank_ResetToDefault>Zurücksetzen</YayosBank_ResetYayosBank_ResetToDefault>
 </LanguageData>

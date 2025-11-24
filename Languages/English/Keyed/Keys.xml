@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
-<YayosBank_ModName>Yayo's Bank</YayosBank_ModName>
-
-<useEnemyFaction>Modded enemy factions use warbond</useEnemyFaction>
-<useVanillaEnemyFaction>Vanilla enemy factions use warbond</useVanillaEnemyFaction>
-<RequiresRestart>(Requires restart)</RequiresRestart>
-
-
+  <YayosBank_ModName>Yayo's Bank</YayosBank_ModName>
+  <YayosBank_useEnemyFaction>Modded enemy factions use warbond</YayosBank_useEnemyFaction>
+  <YayosBank_useVanillaEnemyFaction>Vanilla enemy factions use warbond</YayosBank_useVanillaEnemyFaction>
+  <YayosBank_RequiresRestart>(Requires restart)</YayosBank_RequiresRestart>
+  <YayosBank_CurrentModVersion>Installed mod-version: {0}</YayosBank_CurrentModVersion>
+  <YayosBank_ResetYayosBank_ResetToDefault>Reset</YayosBank_ResetYayosBank_ResetToDefault>
   <rimwarLink.t>RimWar linkage</rimwarLink.t>
   <rimwarLink.d>It only works if you use RimWar together. Bond prices fluctuate according to the power of the RimWar system.</rimwarLink.d>
   <rimwarPriceFactor.t>RimWar price factor</rimwarPriceFactor.t>

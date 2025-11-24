@@ -14,15 +14,15 @@ public static class Harmony_SomeNamespace
 {
     public const int modularTicksUnit = 60000; //하루의 길이, 하루에 두번이상 저장할시 그날 데이터 덮어씀
 
-    private static readonly MethodInfo ExtraTabTranspilerCall =
-        AccessTools.Method(typeof(Harmony_SomeNamespace), nameof(ExtraTabFunc));
-
     private static readonly FieldInfo
         CurTabAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "curTab");
 
-    private static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
-
     private static readonly CustomGraphGroup customGraphGroup = new();
+
+    private static readonly MethodInfo ExtraTabTranspilerCall =
+        AccessTools.Method(typeof(Harmony_SomeNamespace), nameof(ExtraTabFunc));
+
+    private static readonly FieldInfo TabsAccessor = AccessTools.DeclaredField(typeof(MainTabWindow_History), "tabs");
 
     static Harmony_SomeNamespace()
     {
@@ -45,22 +45,6 @@ public static class Harmony_SomeNamespace
             null,
             new HarmonyMethod(typeof(Harmony_SomeNamespace), nameof(DoWindowContentsPostFix))
         );
-    }
-
-    public static void ExtraTabFunc(List<TabRecord> list)
-    {
-        list.Add(new TabRecord("Statistics".Translate(),
-            delegate
-            {
-                CurTabAccessor.SetValue(null, (byte)2, BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == 2));
-        list.Add(new TabRecord("warbond_graphTitle".Translate(),
-            delegate
-            {
-                CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex,
-                    BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == RimstocksMod.ExtraHistoryTabIndex));
-        //CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
     }
 
     public static void DoWindowContentsPostFix(Rect rect, ref FloatRange ___graphSection)
@@ -109,10 +93,20 @@ public static class Harmony_SomeNamespace
         GUI.EndGroup();
     }
 
-    public static void patch_preOpen1(ref FloatRange ___graphSection)
+    public static void ExtraTabFunc(List<TabRecord> list)
     {
-        var num = (float)Core.AbsTickGame / GenDate.TicksPerDay;
-        ___graphSection = new FloatRange(Mathf.Max(0f, num - 30f), num);
+        list.Add(new TabRecord("Statistics".Translate(),
+            delegate
+            {
+                CurTabAccessor.SetValue(null, (byte)2, BindingFlags.NonPublic | BindingFlags.Static, null, null);
+            }, () => (byte)CurTabAccessor.GetValue(null) == 2));
+        list.Add(new TabRecord("warbond_graphTitle".Translate(),
+            delegate
+            {
+                CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex,
+                    BindingFlags.NonPublic | BindingFlags.Static, null, null);
+            }, () => (byte)CurTabAccessor.GetValue(null) == RimstocksMod.ExtraHistoryTabIndex));
+        //CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
     }
 
     public static IEnumerable<CodeInstruction> graphTranspiler(IEnumerable<CodeInstruction> instructions)
@@ -152,5 +146,11 @@ public static class Harmony_SomeNamespace
                 yield return new CodeInstruction(OpCodes.Call, ExtraTabTranspilerCall);
             }
         }
+    }
+
+    public static void patch_preOpen1(ref FloatRange ___graphSection)
+    {
+        var num = (float)Core.AbsTickGame / GenDate.TicksPerDay;
+        ___graphSection = new FloatRange(Mathf.Max(0f, num - 30f), num);
     }
 }

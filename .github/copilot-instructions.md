@@ -1,39 +1,49 @@
-# GitHub Copilot Instructions for RimWorld Modding Project
+# GitHub Copilot Instructions for Yayo's Bank (Continued)
 
 ## Mod Overview and Purpose
-This mod, presumably named "RimStocks," enhances the trading and economic aspects of RimWorld by introducing new systems for managing factions, tradeables, and price data. Its primary purpose is to provide an in-depth economic and trading system, allowing players to engage with more dynamic and realistic trade mechanics. The mod offers various features such as faction-specific price data management, customized dialog interfaces for factions, and detailed graphs of economic trends.
+Yayo's Bank (Continued) is an economic-themed mod for RimWorld, originally created by YAYO and updated by Amnabis. The mod introduces complex economic systems where players can engage in financial activities with in-game factions, such as loans and war bonds. The mod is designed to add depth to the economic interactions within the game, offering players unique challenges and opportunities involving faction relations and financial management.
 
 ## Key Features and Systems
-- **Faction Dialogs**: Custom interfaces for interacting with factions via `FactionDialogMaker_FactionDialogFor` class.
-- **Price Management**: Real-time tracking and management of faction-specific price data using `FactionPriceData` and `FactionData` classes.
-- **Graphical Representations**: Display economic trends and patterns through custom graphs using `CustomGraphGroup` class.
-- **Quest Integration**: Modify quest outcomes and dynamics through classes like `Quest_End`.
-- **Stack Management**: Enhanced item stacking logic via `Thing_TryAbsorbStack` class.
-- **Trade System Enhancement**: Improve item trading mechanics by using `Tradeable_InitPriceDataIfNeeded`.
+- **Loan System**: Players can take out loans from factions. Failure to repay loans with interest may result in hostile actions from the lender, including creditor raids.
+  
+- **War Bonds**: Factions sell war bonds, whose prices fluctuate over time. Bonds can be used to request military aid or held onto for item rewards. Players can benefit from economic incidents affecting bond prices.
+
+- **Economic Incidents**:
+  - Loan increases due to interest
+  - Seizure bankruptcy
+  - Creditor raids
+  - Dividend arrivals, represented by items in drop pods every quarter
+  - Bond price changes influenced by quest success
+
+- **Bonds Utilization**: Use bonds to receive quarterly gifts from factions or request military aid. Bonds can be sold at a profit when their price rises.
 
 ## Coding Patterns and Conventions
-- **Class Naming**: Classes generally follow PascalCase, clearly indicating their purpose. For example, `FactionDialogMaker_FactionDialogFor` and `WorldComponent_PriceSaveLoad`.
-- **Access Modifiers**: Public, internal, and static modifiers are used judiciously to control the accessibility and lifecycle of classes and methods.
-- **Inheritance and Implementation**: Implementations of interfaces, such as `IExposable`, suggest a focus on data serialization and exposure.
+- **C# Structure**: The mod follows typical C# object-oriented design principles using classes and methods to encapsulate functionality.
+- **Naming Conventions**: CamelCase is used for public class names and methods. Internal classes and methods use a similar naming convention with appropriate access modifiers.
+  
+- **File Organization**: Source code is organized into specific files for different functionalities such as faction dialogues, harmony patches, quest handling, etc.
 
 ## XML Integration
-- The mod does not explicitly outline XML files, but integration with RimWorld's XML-driven system can be inferred. XML likely plays a role in defining game assets like items or factions. Ensure XML files are correctly placed within the mod's `Defs` folder structure and maintain clear tag and attribute naming.
+- XML is used for defining the mod's static data, such as item definitions, events, and interactions with RimWorld's core systems. Ensure proper syntax and adherence to RimWorld’s expected data structure for seamless integration.
 
 ## Harmony Patching
-- **Instrumenting Def Generation**: The `harmonyPatch_core` class contains Harmony patches, particularly targeting methods like `DefGenerator_GenerateImpliedDefs_PreResolve`, to override or enhance game functionality.
-- **Namespace-Based Patching**: Organize Harmony patches by functionality within namespaces, as seen in `Harmony_SomeNamespace`.
+- **Harmony Patches**: Utilized in `Harmony_SomeNamespace.cs`, this mod employs Harmony for patching existing game methods to inject additional functionality or modify behaviors at runtime.
+- **Method Prefix/Postfix**: Use prefixes to inject logic before a method executes, and postfixes to modify behavior after a method runs.
 
 ## Suggestions for Copilot
-1. **Template Code Generation**: Utilize Copilot to generate scaffolding for new classes or methods, maintaining consistency with existing patterns. For example, new `MapComponent` subclasses should mirror the constructor pattern found in `Core(Map map) : MapComponent(map)`.
+1. **Automatic Naming Suggestions**: When declaring new classes or methods, Copilot can suggest meaningful names based on their roles within the mod.
+2. **XML Template Generation**: Suggest XML templates based on defined C# objects to ensure seamless data integration.
+3. **Code Completion**: Assist with code completion while writing complex economic logic or implementing harmony patches.
+4. **Error Prevention**: Provide suggestions to prevent common errors in RimWorld modding, such as handling null references or incorrect XML schema usage.
+5. **Documentation Enhancements**: Encourage inline comments and summaries for public methods to maintain comprehensive documentation.
 
-2. **Repeated Patterns**: For repetitive coding tasks such as implementing `IExposable`, Copilot can be leveraged to auto-generate boilerplate code ensuring consistent serialization logic mimicking the existing pattern in `FactionPriceData`.
+## Author's Note
+Feel free to modify and expand upon this mod. The source code is included for developers to experiment with and create new variations. If you're interested in contributing or discussing ideas, you’re encouraged to reach out via the RimWorld Discord.
 
-3. **Harmony Patch Creation**: Encourage Copilot to assist in creating new Harmony patches by providing it with examples from `harmonyPatch_core`.
+## Support and Troubleshooting
+- Use the Log Uploader for error logs.
+- For support, utilize the designated Discord channel rather than GitHub discussions for timely assistance.
+- If you discover a solution to a problem, contribute by posting it to the GitHub repository.
+- Organize your mods with RimSort for optimal performance and compatibility. 
 
-4. **Graphing Logic**: When developing new graphical elements, utilize Copilot for drawing logic that is similar in complexity to `CustomGraphGroup.DrawGraph`.
-
-5. **Event Handling**: Facilitate Copilot to assist in writing event-driven code by drawing on similar handlers or setups, promoting uniformity across the mod.
-
-6. **Code Documentation**: Use Copilot to draft XML-documentation comments for public APIs to improve code readability and maintainability.
-
-By following these guidelines and utilizing GitHub Copilot effectively, developers can maintain a high level of consistency, efficiency, and quality throughout the modding project.
+Tags: cash, money, stock, stonk, economics

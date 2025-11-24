@@ -50,4 +50,10 @@
   <loan.giveUp.ok>Appliquer la faillite</loan.giveUp.ok>
   <maxReward.t>Distribution maximale de dividendes</maxReward.t>
   <maxReward.d>Impossible d'obtenir un paiement plus élevé que celui-ci</maxReward.d>
+  <YayosBank_ModName>La banque de Yayo</YayosBank_ModName>
+  <YayosBank_useEnemyFaction>Les factions ennemies moddées utilisent le warbond</YayosBank_useEnemyFaction>
+  <YayosBank_useVanillaEnemyFaction>Les factions ennemies de Vanilla utilisent les warbond</YayosBank_useVanillaEnemyFaction>
+  <YayosBank_RequiresRestart>(Nécessite un redémarrage)</YayosBank_RequiresRestart>
+  <YayosBank_CurrentModVersion>Version installée du mod : {0}</YayosBank_CurrentModVersion>
+  <YayosBank_ResetYayosBank_ResetToDefault>Remise à zéro</YayosBank_ResetYayosBank_ResetToDefault>
 </LanguageData>

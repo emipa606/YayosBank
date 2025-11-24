@@ -11,32 +11,47 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 {
     public static WorldComponent_PriceSaveLoad staticInstance;
     private Dictionary<string, FactionData> ar_factionData = new();
-    public Dictionary<string, FactionPriceData> factionToPriceData = new();
     private bool initialized;
+    public Dictionary<string, FactionPriceData> factionToPriceData = new();
 
     public WorldComponent_PriceSaveLoad(World world) : base(world)
     {
         staticInstance = this;
     }
 
-    public static void savePrice(FactionDef faction, float tick, float price)
+    //From HugsLib conversion
+    private void DoMapLoaded()
     {
-        staticInstance.getFactionPriceDataFrom(faction).savePrice(tick, price);
+        // replicate MapLoaded logic
+        // "마지막 채권가격 불러오기, 아이템 가격에 적용"
+        if (Core.ar_warbondDef == null) return;
+        for (var i = 0; i < Core.ar_warbondDef.Count; i++)
+        {
+            var f = Core.ar_faction[i];
+            var lastPrice = WorldComponent_PriceSaveLoad.loadPrice(f, Core.AbsTickGame);
+            Core.ar_warbondDef[i].SetStatBaseValue(StatDefOf.MarketValue, lastPrice);
+        }
     }
 
-    public static float loadPrice(FactionDef faction, float tick)
+    private FactionData getFactionData_p(Faction f)
     {
-        return staticInstance.getFactionPriceDataFrom(faction).loadPrice(tick);
-    }
+        var Key = f.GetUniqueLoadID();
+        if (ar_factionData.TryGetValue(Key, out var p))
+        {
+            return p;
+        }
 
-    public static void saveTrend(FactionDef faction, float tick, float price)
-    {
-        staticInstance.getFactionPriceDataFrom(faction).saveTrend(tick, price);
-    }
+        var data = new FactionData
+        {
+            loan = 0,
+            loan_targetTick = 0,
+            loan_totalTick = 0,
+            loan_per = 0f,
+            loan_raidMulti = 0f
+        };
+        ar_factionData.Add(Key, data);
 
-    public static float loadTrend(FactionDef faction, float tick)
-    {
-        return staticInstance.getFactionPriceDataFrom(faction).loadTrend(tick);
+        return ar_factionData[Key];
     }
 
     private FactionPriceData getFactionPriceDataFrom(FactionDef f)
@@ -65,9 +80,21 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         return factionToPriceData[Key];
     }
 
-    public FactionPriceData func_289013(string Key)
+    public override void ExposeData()
     {
-        return factionToPriceData.GetValueOrDefault(Key);
+        Scribe_Values.Look(ref initialized, "initialized");
+        Scribe_Collections.Look(ref factionToPriceData, "yayo_FactionPriceData", LookMode.Value, LookMode.Deep);
+        Scribe_Collections.Look(ref ar_factionData, "yayo_FactionData", LookMode.Value, LookMode.Deep);
+        if (ar_factionData != null)
+        {
+            return;
+        }
+
+        foreach (var f in Find.FactionManager.AllFactions)
+        {
+            var data = new FactionData();
+            ar_factionData?.Add(f.GetUniqueLoadID(), data);
+        }
     }
 
     public override void FinalizeInit(bool fromLoad)
@@ -88,9 +115,9 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
                 }
                 */
             foreach (var f in from f in DefDatabase<FactionDef>.AllDefs
-                     where
-                         Core.isWarbondFaction(f)
-                     select f)
+                              where
+                                  Core.isWarbondFaction(f)
+                              select f)
             {
                 if (RimstocksMod.use_rimwar)
                 {
@@ -122,34 +149,9 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         }
     }
 
-    //From HugsLib conversion
-    private void DoMapLoaded()
+    public FactionPriceData func_289013(string Key)
     {
-        // replicate MapLoaded logic
-        // "마지막 채권가격 불러오기, 아이템 가격에 적용"
-        if (Core.ar_warbondDef == null) return;
-        for (var i = 0; i < Core.ar_warbondDef.Count; i++)
-        {
-            var f = Core.ar_faction[i];
-            var lastPrice = WorldComponent_PriceSaveLoad.loadPrice(f, Core.AbsTickGame);
-            Core.ar_warbondDef[i].SetStatBaseValue(StatDefOf.MarketValue, lastPrice);
-        }
-    }
-    public override void ExposeData()
-    {
-        Scribe_Values.Look(ref initialized, "initialized");
-        Scribe_Collections.Look(ref factionToPriceData, "yayo_FactionPriceData", LookMode.Value, LookMode.Deep);
-        Scribe_Collections.Look(ref ar_factionData, "yayo_FactionData", LookMode.Value, LookMode.Deep);
-        if (ar_factionData != null)
-        {
-            return;
-        }
-
-        foreach (var f in Find.FactionManager.AllFactions)
-        {
-            var data = new FactionData();
-            ar_factionData?.Add(f.GetUniqueLoadID(), data);
-        }
+        return factionToPriceData.GetValueOrDefault(Key);
     }
 
 
@@ -158,24 +160,23 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
         return staticInstance.getFactionData_p(f);
     }
 
-    private FactionData getFactionData_p(Faction f)
+    public static float loadPrice(FactionDef faction, float tick)
     {
-        var Key = f.GetUniqueLoadID();
-        if (ar_factionData.TryGetValue(Key, out var p))
-        {
-            return p;
-        }
+        return staticInstance.getFactionPriceDataFrom(faction).loadPrice(tick);
+    }
 
-        var data = new FactionData
-        {
-            loan = 0,
-            loan_targetTick = 0,
-            loan_totalTick = 0,
-            loan_per = 0f,
-            loan_raidMulti = 0f
-        };
-        ar_factionData.Add(Key, data);
+    public static float loadTrend(FactionDef faction, float tick)
+    {
+        return staticInstance.getFactionPriceDataFrom(faction).loadTrend(tick);
+    }
 
-        return ar_factionData[Key];
+    public static void savePrice(FactionDef faction, float tick, float price)
+    {
+        staticInstance.getFactionPriceDataFrom(faction).savePrice(tick, price);
+    }
+
+    public static void saveTrend(FactionDef faction, float tick, float price)
+    {
+        staticInstance.getFactionPriceDataFrom(faction).saveTrend(tick, price);
     }
 }

@@ -1,13 +1,13 @@
 # [Yayo's Bank (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2888738292)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of YAYO, Amnabis mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2368878128
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 # **Introduce**
 
@@ -22,25 +22,25 @@ You can use the bond to ask for help or keep it to get a item reward.
 
 **- Loan for get Silver**
 
-![Image](https://imgur.com/QoTwb50.gif)
+![Image](https://img.litet.net/QoTwb50.gif)
 
 
 
 **- Seizure bankruptcy**
 
-![Image](https://imgur.com/4Hq2arD.gif)
+![Image](https://img.litet.net/4Hq2arD.gif)
 
 
 
 **- War Bond**
 
-![Image](https://imgur.com/4VRllzh.gif)
+![Image](https://img.litet.net/4VRllzh.gif)
 
 
 
 **- Bond price graph**
 
-![Image](https://imgur.com/WhUg7Wv.gif)
+![Image](https://img.litet.net/WhUg7Wv.gif)
 
 
 
@@ -78,13 +78,13 @@ I'm a game designer, and I haven't implemented many ideas yet due to lack of tim
 If you are proficient in C# and are interested, please contact me on the rimworld discord.**
 
 tag : cash, money, stock, stonk
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.

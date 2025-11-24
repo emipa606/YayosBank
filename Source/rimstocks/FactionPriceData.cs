@@ -8,13 +8,13 @@ namespace rimstocks;
 
 public class FactionPriceData : IExposable
 {
+
+    private Dictionary<int, float> timeToTrendData = new();
     public Color color;
     public string defname;
     public bool graphEnabled = true;
     public string label;
     public Dictionary<int, float> timeToPriceData = new();
-
-    private Dictionary<int, float> timeToTrendData = new();
 
     //public float loan = 0f;
     //public int loan_day = 0;
@@ -26,14 +26,6 @@ public class FactionPriceData : IExposable
         Scribe_Values.Look(ref color, "color");
         Scribe_Collections.Look(ref timeToPriceData, "timeToPriceData", LookMode.Value, LookMode.Value);
         Scribe_Collections.Look(ref timeToTrendData, "timeToTrendData", LookMode.Value, LookMode.Value);
-    }
-
-    public void savePrice(float tick, float price)
-    {
-        var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
-        timeToPriceData.Remove(unitTime);
-
-        timeToPriceData.Add(unitTime, price);
     }
 
     public float loadPrice(float tick)
@@ -54,14 +46,6 @@ public class FactionPriceData : IExposable
             : Rand.Range(200f, 6000f);
     }
 
-    public void saveTrend(float tick, float trend)
-    {
-        var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
-        timeToTrendData.Remove(unitTime);
-
-        timeToTrendData.Add(unitTime, trend);
-    }
-
     public float loadTrend(float tick)
     {
         var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
@@ -78,5 +62,21 @@ public class FactionPriceData : IExposable
         return FactionDef.Named(defname) != null
             ? Core.getDefaultPrice(FactionDef.Named(defname))
             : Rand.Range(200f, 6000f);
+    }
+
+    public void savePrice(float tick, float price)
+    {
+        var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
+        timeToPriceData.Remove(unitTime);
+
+        timeToPriceData.Add(unitTime, price);
+    }
+
+    public void saveTrend(float tick, float trend)
+    {
+        var unitTime = Mathf.FloorToInt(tick / Harmony_SomeNamespace.modularTicksUnit);
+        timeToTrendData.Remove(unitTime);
+
+        timeToTrendData.Add(unitTime, trend);
     }
 }

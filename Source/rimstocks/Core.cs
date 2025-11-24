@@ -10,17 +10,130 @@ namespace rimstocks;
 
 public class Core(Map map) : MapComponent(map)
 {
-    public static readonly List<ThingDef> ar_warbondDef = [];
-    public static readonly List<FactionDef> ar_faction = [];
     private static readonly List<en_graphStyle> ar_graphStyle = [];
 
     private static readonly float basicPrice = 500f;
+    public static readonly List<FactionDef> ar_faction = [];
+    public static readonly List<ThingDef> ar_warbondDef = [];
     private readonly float maxPrice = 10000f;
 
     private readonly float minPrice = 1f;
 
+    private static void changeRimwarAllFactionPower(FloatRange changeScaleRange, float increasePer)
+    {
+        if (!RimstocksMod.use_rimwar)
+        {
+            return;
+        }
 
-    public static int AbsTickGame => Find.TickManager.TicksGame + (GenDate.GameStartHourOfDay * GenDate.TicksPerHour);
+        foreach (var f in Find.FactionManager.AllFactions)
+        {
+            var data = WorldUtility.GetRimWarDataForFaction(f);
+            if (data == null)
+            {
+                continue;
+            }
+
+            var multiply = 1f;
+            if (Rand.Chance(increasePer))
+            {
+                var nerfForTooMuchPowerful = Mathf.Min(1f, 1500f * RimstocksMod.rimwarPriceFactor / getRimwarPrice(f));
+                multiply += Rand.Range(changeScaleRange.min, changeScaleRange.max) * nerfForTooMuchPowerful;
+            }
+            else
+            {
+                multiply -= Rand.Range(changeScaleRange.min, changeScaleRange.max);
+            }
+
+            foreach (var st in data.WarSettlementComps)
+            {
+                st.RimWarPoints = Mathf.RoundToInt(st.RimWarPoints * multiply);
+            }
+        }
+    }
+
+    private static float getRimwarPrice(Faction f)
+    {
+        var price = -1f;
+        if (!RimstocksMod.use_rimwar)
+        {
+            return price;
+        }
+
+        // 림워
+        try
+        {
+            ((Action)(() =>
+            {
+                price = WorldUtility.GetRimWarDataForFaction(f) != null
+                    ? WorldUtility.GetRimWarDataForFaction(f).TotalFactionPoints
+                    : 0;
+                price *= RimstocksMod.rimwarPriceFactor;
+                price = Mathf.Max(1f, price);
+            }))();
+        }
+        catch (TypeLoadException)
+        {
+        }
+
+        return price;
+    }
+
+
+    public static float getDefaultPrice(FactionDef fd)
+    {
+        var index = ar_faction.IndexOf(fd);
+        if (index < 0 || index >= ar_graphStyle.Count)
+        {
+            return Rand.Range(200f, 6000f);
+        }
+
+        var style = ar_graphStyle[index];
+        switch (style)
+        {
+            case en_graphStyle.small:
+                return Rand.Range(350f, 450f);
+            default:
+                return Rand.Range(1750f, 2050f);
+            case en_graphStyle.big:
+                return Rand.Range(4100f, 4500f);
+        }
+    }
+
+    public static float getRimwarPriceByDef(FactionDef fd)
+    {
+        var price = -1f;
+        if (!RimstocksMod.use_rimwar)
+        {
+            return price;
+        }
+
+        // 림워
+        try
+        {
+            ((Action)(() =>
+            {
+                price = 0;
+                foreach (var f in Find.FactionManager.AllFactions)
+                {
+                    if (f.def == fd)
+                    {
+                        price += WorldUtility.GetRimWarDataForFaction(f) != null
+                            ? WorldUtility.GetRimWarDataForFaction(f).TotalFactionPoints
+                            : 0;
+                    }
+                }
+
+                price *= RimstocksMod.rimwarPriceFactor;
+                price = Mathf.Max(1f, price);
+            }))();
+        }
+        catch (TypeLoadException)
+        {
+        }
+
+        return price;
+    }
 
 
     public static bool isWarbondFaction(FactionDef f)
@@ -659,9 +772,9 @@ public class Core(Map map) : MapComponent(map)
     {
         // 채권 아이템 DEF 생성
         foreach (var f in from f in DefDatabase<FactionDef>.AllDefs
-                 where
-                     isWarbondFaction(f)
-                 select f)
+                          where
+                              isWarbondFaction(f)
+                          select f)
         {
             var t = new ThingDef
             {
@@ -795,129 +908,16 @@ public class Core(Map map) : MapComponent(map)
     public static void patchIncident()
     {
         foreach (var i in from i in DefDatabase<IncidentDef>.AllDefs
-                 where
-                     i.defName.Contains("rs_warbond")
-                 select i)
+                          where
+                              i.defName.Contains("rs_warbond")
+                          select i)
         {
             i.baseChance = 3f * RimstocksMod.priceEvent_multiply;
         }
     }
 
 
-    public static float getDefaultPrice(FactionDef fd)
-    {
-        var index = ar_faction.IndexOf(fd);
-        if (index < 0 || index >= ar_graphStyle.Count)
-        {
-            return Rand.Range(200f, 6000f);
-        }
-
-        var style = ar_graphStyle[index];
-        switch (style)
-        {
-            case en_graphStyle.small:
-                return Rand.Range(350f, 450f);
-            default:
-                return Rand.Range(1750f, 2050f);
-            case en_graphStyle.big:
-                return Rand.Range(4100f, 4500f);
-        }
-    }
-
-    private static void changeRimwarAllFactionPower(FloatRange changeScaleRange, float increasePer)
-    {
-        if (!RimstocksMod.use_rimwar)
-        {
-            return;
-        }
-
-        foreach (var f in Find.FactionManager.AllFactions)
-        {
-            var data = WorldUtility.GetRimWarDataForFaction(f);
-            if (data == null)
-            {
-                continue;
-            }
-
-            var multiply = 1f;
-            if (Rand.Chance(increasePer))
-            {
-                var nerfForTooMuchPowerful = Mathf.Min(1f, 1500f * RimstocksMod.rimwarPriceFactor / getRimwarPrice(f));
-                multiply += Rand.Range(changeScaleRange.min, changeScaleRange.max) * nerfForTooMuchPowerful;
-            }
-            else
-            {
-                multiply -= Rand.Range(changeScaleRange.min, changeScaleRange.max);
-            }
-
-            foreach (var st in data.WarSettlementComps)
-            {
-                st.RimWarPoints = Mathf.RoundToInt(st.RimWarPoints * multiply);
-            }
-        }
-    }
-
-    public static float getRimwarPriceByDef(FactionDef fd)
-    {
-        var price = -1f;
-        if (!RimstocksMod.use_rimwar)
-        {
-            return price;
-        }
-
-        // 림워
-        try
-        {
-            ((Action)(() =>
-            {
-                price = 0;
-                foreach (var f in Find.FactionManager.AllFactions)
-                {
-                    if (f.def == fd)
-                    {
-                        price += WorldUtility.GetRimWarDataForFaction(f) != null
-                            ? WorldUtility.GetRimWarDataForFaction(f).TotalFactionPoints
-                            : 0;
-                    }
-                }
-
-                price *= RimstocksMod.rimwarPriceFactor;
-                price = Mathf.Max(1f, price);
-            }))();
-        }
-        catch (TypeLoadException)
-        {
-        }
-
-        return price;
-    }
-
-    private static float getRimwarPrice(Faction f)
-    {
-        var price = -1f;
-        if (!RimstocksMod.use_rimwar)
-        {
-            return price;
-        }
-
-        // 림워
-        try
-        {
-            ((Action)(() =>
-            {
-                price = WorldUtility.GetRimWarDataForFaction(f) != null
-                    ? WorldUtility.GetRimWarDataForFaction(f).TotalFactionPoints
-                    : 0;
-                price *= RimstocksMod.rimwarPriceFactor;
-                price = Mathf.Max(1f, price);
-            }))();
-        }
-        catch (TypeLoadException)
-        {
-        }
-
-        return price;
-    }
+    public static int AbsTickGame => Find.TickManager.TicksGame + (GenDate.GameStartHourOfDay * GenDate.TicksPerHour);
 
     private enum en_graphStyle
     {

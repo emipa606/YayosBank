@@ -6,8 +6,7 @@ namespace rimstocks.HarmonyPatches;
 [HarmonyPatch(typeof(Tradeable), "InitPriceDataIfNeeded")]
 internal class Tradeable_InitPriceDataIfNeeded
 {
-    [HarmonyPostfix]
-    private static void Postfix(Tradeable __instance, ref float ___pricePlayerBuy, ref float ___pricePlayerSell)
+    public static void Postfix(Tradeable __instance, ref float ___pricePlayerBuy, ref float ___pricePlayerSell)
     {
         if (__instance.ThingDef.tradeTags == null || !__instance.ThingDef.tradeTags.Contains("warbond"))
         {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HugsLib.UpdateFeatureDef Abstract="true" Name="YayosBank_UpdateFeatureBase">
+		<modNameReadable>YayosBank</modNameReadable>
+		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2888738292</linkUrl>
+	</HugsLib.UpdateFeatureDef>
+	<HugsLib.UpdateFeatureDef ParentName="YayosBank_UpdateFeatureBase">
+		<defName>YayosBank_1_6_0</defName>
+		<assemblyVersion>1.6.0</assemblyVersion>
+		<content>This update of the mod removes the need for HugsLib, thanks to Zaljerem!</content>
+	</HugsLib.UpdateFeatureDef>
+</Defs>
+

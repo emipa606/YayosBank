@@ -50,4 +50,10 @@
   <loan.giveUp.ok>Применить банкротство</loan.giveUp.ok>
   <maxReward.t>Максимальный размер дивидендных выплат</maxReward.t>
   <maxReward.d>Невозможно получить более высокую выплату, чем эта</maxReward.d>
+  <YayosBank_ModName>Банк Яйо</YayosBank_ModName>
+  <YayosBank_useEnemyFaction>Модифицированные вражеские фракции используют варбонд</YayosBank_useEnemyFaction>
+  <YayosBank_useVanillaEnemyFaction>Ванильные вражеские фракции используют варбонд</YayosBank_useVanillaEnemyFaction>
+  <YayosBank_RequiresRestart>(Требуется перезапуск)</YayosBank_RequiresRestart>
+  <YayosBank_CurrentModVersion>Установленная версия мода: {0}</YayosBank_CurrentModVersion>
+  <YayosBank_ResetYayosBank_ResetToDefault>Сбросить</YayosBank_ResetYayosBank_ResetToDefault>
 </LanguageData>

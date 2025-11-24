@@ -7,61 +7,8 @@ namespace rimstocks;
 
 public class CustomGraphGroup
 {
-    private readonly List<SimpleCurveDrawInfo> curves = [];
     private int cachedGraphTickCount = -1;
-
-    public void DrawGraph(Rect graphRect, Rect legendRect, FloatRange section)
-    {
-        var ticksGame = Core.AbsTickGame;
-        if (ticksGame != cachedGraphTickCount)
-        {
-            cachedGraphTickCount = ticksGame;
-            curves.Clear();
-            //foreach (string faction in WorldComponent_PriceSaveLoad.staticInstance.factionToPriceData.Keys)
-            foreach (var f in Core.ar_faction)
-            {
-                var key = Util.factionDefNameToKey(f.defName);
-                if (!WorldComponent_PriceSaveLoad.staticInstance.factionToPriceData.ContainsKey(key))
-                {
-                    continue;
-                }
-
-                var rs = WorldComponent_PriceSaveLoad.staticInstance.func_289013(key);
-                if (!rs.graphEnabled)
-                {
-                    continue;
-                }
-
-                var simpleCurveDrawInfo = new SimpleCurveDrawInfo
-                {
-                    color = rs.color,
-                    label = rs.label,
-                    curve = []
-                };
-                foreach (var kvp in rs.timeToPriceData)
-                {
-                    simpleCurveDrawInfo.curve.Add(new CurvePoint(kvp.Key, kvp.Value), false);
-                }
-
-                simpleCurveDrawInfo.curve.SortPoints();
-                curves.Add(simpleCurveDrawInfo);
-            }
-        }
-
-        if (Mathf.Approximately(section.min, section.max))
-        {
-            section.max += 1.66666669E-05f;
-        }
-
-        var curveDrawerStyle = Find.History.curveDrawerStyle;
-        curveDrawerStyle.FixedSection = section;
-        curveDrawerStyle.UseFixedScale = false;
-        curveDrawerStyle.FixedScale = default;
-        curveDrawerStyle.YIntegersOnly = false;
-        curveDrawerStyle.OnlyPositiveValues = true;
-        DrawCurves(graphRect, curves, curveDrawerStyle, legendRect);
-        Text.Anchor = TextAnchor.UpperLeft;
-    }
+    private readonly List<SimpleCurveDrawInfo> curves = [];
 
     public static void DrawCurves(Rect rect, List<SimpleCurveDrawInfo> curves, SimpleCurveDrawerStyle style = null,
         Rect legendRect = default)
@@ -224,5 +171,58 @@ public class CustomGraphGroup
         GUI.EndGroup();
         GUI.color = Color.white;
         Text.WordWrap = true;
+    }
+
+    public void DrawGraph(Rect graphRect, Rect legendRect, FloatRange section)
+    {
+        var ticksGame = Core.AbsTickGame;
+        if (ticksGame != cachedGraphTickCount)
+        {
+            cachedGraphTickCount = ticksGame;
+            curves.Clear();
+            //foreach (string faction in WorldComponent_PriceSaveLoad.staticInstance.factionToPriceData.Keys)
+            foreach (var f in Core.ar_faction)
+            {
+                var key = Util.factionDefNameToKey(f.defName);
+                if (!WorldComponent_PriceSaveLoad.staticInstance.factionToPriceData.ContainsKey(key))
+                {
+                    continue;
+                }
+
+                var rs = WorldComponent_PriceSaveLoad.staticInstance.func_289013(key);
+                if (!rs.graphEnabled)
+                {
+                    continue;
+                }
+
+                var simpleCurveDrawInfo = new SimpleCurveDrawInfo
+                {
+                    color = rs.color,
+                    label = rs.label,
+                    curve = []
+                };
+                foreach (var kvp in rs.timeToPriceData)
+                {
+                    simpleCurveDrawInfo.curve.Add(new CurvePoint(kvp.Key, kvp.Value), false);
+                }
+
+                simpleCurveDrawInfo.curve.SortPoints();
+                curves.Add(simpleCurveDrawInfo);
+            }
+        }
+
+        if (Mathf.Approximately(section.min, section.max))
+        {
+            section.max += 1.66666669E-05f;
+        }
+
+        var curveDrawerStyle = Find.History.curveDrawerStyle;
+        curveDrawerStyle.FixedSection = section;
+        curveDrawerStyle.UseFixedScale = false;
+        curveDrawerStyle.FixedScale = default;
+        curveDrawerStyle.YIntegersOnly = false;
+        curveDrawerStyle.OnlyPositiveValues = true;
+        DrawCurves(graphRect, curves, curveDrawerStyle, legendRect);
+        Text.Anchor = TextAnchor.UpperLeft;
     }
 }

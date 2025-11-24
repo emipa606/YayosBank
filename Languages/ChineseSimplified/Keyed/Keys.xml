@@ -50,4 +50,10 @@
   <loan.giveUp.ok>申请破产</loan.giveUp.ok>
   <maxReward.t>最高派息额</maxReward.t>
   <maxReward.d>没有比这更高的赔率了</maxReward.d>
+  <YayosBank_ModName>亚约银行</YayosBank_ModName>
+  <YayosBank_useEnemyFaction>修改后的敌方派系使用战争债券</YayosBank_useEnemyFaction>
+  <YayosBank_useVanillaEnemyFaction>Vanilla 敌方派系使用战争债券</YayosBank_useVanillaEnemyFaction>
+  <YayosBank_RequiresRestart>(需要重新启动）</YayosBank_RequiresRestart>
+  <YayosBank_CurrentModVersion>已安装 MOD 版本：{0}</YayosBank_CurrentModVersion>
+  <YayosBank_ResetYayosBank_ResetToDefault>重置</YayosBank_ResetYayosBank_ResetToDefault>
 </LanguageData>
