@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+
+<YayosBank_ModName>Yayo's Bank</YayosBank_ModName>
+
+<useEnemyFaction>Modded enemy factions use warbond</useEnemyFaction>
+<useVanillaEnemyFaction>Vanilla enemy factions use warbond</useVanillaEnemyFaction>
+<RequiresRestart>(Requires restart)</RequiresRestart>
+
+
   <rimwarLink.t>RimWar linkage</rimwarLink.t>
   <rimwarLink.d>It only works if you use RimWar together. Bond prices fluctuate according to the power of the RimWar system.</rimwarLink.d>
   <rimwarPriceFactor.t>RimWar price factor</rimwarPriceFactor.t>
@@ -13,8 +21,8 @@
   <maxReward.d>Cannot get higher payout than this</maxReward.d>
   <DelistingPrice.t>Delisting price</DelistingPrice.t>
   <DelistingPrice.d>When the price of a bond falls below this price, bonds disappear.</DelistingPrice.d>
-  <limitDate.t>bond date limit (Days)</limitDate.t>
-  <limitDate.d>bonds are removed after the limited period.</limitDate.d>
+  <limitDate.t>Bond date limit (Days)</limitDate.t>
+  <limitDate.d>Bonds are removed after the limited period.</limitDate.d>
   <militaryAid_cost.t>Military aid cost</militaryAid_cost.t>
   <militaryAid_cost.d>Number of bonds consumed</militaryAid_cost.d>
   <militaryAid_multiply.t>Military aid scale multiply</militaryAid_multiply.t>

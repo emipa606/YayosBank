@@ -57,15 +57,15 @@ public static class Harmony_SomeNamespace
         list.Add(new TabRecord("warbond_graphTitle".Translate(),
             delegate
             {
-                CurTabAccessor.SetValue(null, (byte)modBase.ExtraHistoryTabIndex,
+                CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex,
                     BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == modBase.ExtraHistoryTabIndex));
-        //CurTabAccessor.SetValue(null, (byte)modBase.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
+            }, () => (byte)CurTabAccessor.GetValue(null) == RimstocksMod.ExtraHistoryTabIndex));
+        //CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
     }
 
     public static void DoWindowContentsPostFix(Rect rect, ref FloatRange ___graphSection)
     {
-        if ((byte)CurTabAccessor.GetValue(null) != modBase.ExtraHistoryTabIndex)
+        if ((byte)CurTabAccessor.GetValue(null) != RimstocksMod.ExtraHistoryTabIndex)
         {
             return;
         }

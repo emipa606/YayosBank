@@ -44,7 +44,7 @@ public class FactionPriceData : IExposable
             return price;
         }
 
-        if (modBase.use_rimwar && FactionDef.Named(defname) != null)
+        if (RimstocksMod.use_rimwar && FactionDef.Named(defname) != null)
         {
             return Core.getRimwarPriceByDef(FactionDef.Named(defname));
         }
@@ -70,7 +70,7 @@ public class FactionPriceData : IExposable
             return trend;
         }
 
-        if (modBase.use_rimwar && FactionDef.Named(defname) != null)
+        if (RimstocksMod.use_rimwar && FactionDef.Named(defname) != null)
         {
             return Core.getRimwarPriceByDef(FactionDef.Named(defname));
         }
