@@ -10,14 +10,8 @@ public class FactionData : IExposable
     public int loan_targetTick;
     public int loan_totalTick;
 
-    public void clear()
-    {
-        loan = 0;
-        loan_totalTick = 0;
-        loan_targetTick = 0;
-        loan_per = 0f;
-        loan_raidMulti = 0f;
-    }
+    public int loan_leftTick => loan_targetTick - Find.TickManager.TicksGame;
+    public int loan_flowTick => loan_totalTick - loan_leftTick;
 
     public void ExposeData()
     {
@@ -28,6 +22,12 @@ public class FactionData : IExposable
         Scribe_Values.Look(ref loan_raidMulti, "loan_raidMulti");
     }
 
-    public int loan_leftTick => loan_targetTick - Find.TickManager.TicksGame;
-    public int loan_flowTick => loan_totalTick - loan_leftTick;
+    public void clear()
+    {
+        loan = 0;
+        loan_totalTick = 0;
+        loan_targetTick = 0;
+        loan_per = 0f;
+        loan_raidMulti = 0f;
+    }
 }

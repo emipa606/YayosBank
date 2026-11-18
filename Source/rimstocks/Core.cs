@@ -19,6 +19,9 @@ public class Core(Map map) : MapComponent(map)
 
     private readonly float minPrice = 1f;
 
+
+    public static int AbsTickGame => Find.TickManager.TicksGame + (GenDate.GameStartHourOfDay * GenDate.TicksPerHour);
+
     private static void changeRimwarAllFactionPower(FloatRange changeScaleRange, float increasePer)
     {
         if (!RimstocksMod.use_rimwar)
@@ -772,9 +775,9 @@ public class Core(Map map) : MapComponent(map)
     {
         // 채권 아이템 DEF 생성
         foreach (var f in from f in DefDatabase<FactionDef>.AllDefs
-                          where
-                              isWarbondFaction(f)
-                          select f)
+                 where
+                     isWarbondFaction(f)
+                 select f)
         {
             var t = new ThingDef
             {
@@ -896,28 +899,21 @@ public class Core(Map map) : MapComponent(map)
         foreach (var t in ar_warbondDef)
         {
             var cp = t.GetCompProperties<CompProperties_Lifespan>();
-            if (cp == null)
-            {
-                continue;
-            }
 
-            cp.lifespanTicks = GenDate.TicksPerDay * RimstocksMod.limitDate;
+            cp?.lifespanTicks = GenDate.TicksPerDay * RimstocksMod.limitDate;
         }
     }
 
     public static void patchIncident()
     {
         foreach (var i in from i in DefDatabase<IncidentDef>.AllDefs
-                          where
-                              i.defName.Contains("rs_warbond")
-                          select i)
+                 where
+                     i.defName.Contains("rs_warbond")
+                 select i)
         {
             i.baseChance = 3f * RimstocksMod.priceEvent_multiply;
         }
     }
-
-
-    public static int AbsTickGame => Find.TickManager.TicksGame + (GenDate.GameStartHourOfDay * GenDate.TicksPerHour);
 
     private enum en_graphStyle
     {

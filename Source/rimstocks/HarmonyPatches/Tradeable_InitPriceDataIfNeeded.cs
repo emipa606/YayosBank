@@ -4,7 +4,7 @@ using RimWorld;
 namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(Tradeable), "InitPriceDataIfNeeded")]
-internal class Tradeable_InitPriceDataIfNeeded
+internal static class Tradeable_InitPriceDataIfNeeded
 {
     public static void Postfix(Tradeable __instance, ref float ___pricePlayerBuy, ref float ___pricePlayerSell)
     {

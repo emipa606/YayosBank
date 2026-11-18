@@ -8,13 +8,13 @@ namespace rimstocks;
 
 public class FactionPriceData : IExposable
 {
-
-    private Dictionary<int, float> timeToTrendData = new();
     public Color color;
     public string defname;
     public bool graphEnabled = true;
     public string label;
     public Dictionary<int, float> timeToPriceData = new();
+
+    private Dictionary<int, float> timeToTrendData = new();
 
     //public float loan = 0f;
     //public int loan_day = 0;

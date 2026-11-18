@@ -11,8 +11,8 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 {
     public static WorldComponent_PriceSaveLoad staticInstance;
     private Dictionary<string, FactionData> ar_factionData = new();
-    private bool initialized;
     public Dictionary<string, FactionPriceData> factionToPriceData = new();
+    private bool initialized;
 
     public WorldComponent_PriceSaveLoad(World world) : base(world)
     {
@@ -20,15 +20,19 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
     }
 
     //From HugsLib conversion
-    private void DoMapLoaded()
+    private static void DoMapLoaded()
     {
         // replicate MapLoaded logic
         // "마지막 채권가격 불러오기, 아이템 가격에 적용"
-        if (Core.ar_warbondDef == null) return;
+        if (Core.ar_warbondDef == null)
+        {
+            return;
+        }
+
         for (var i = 0; i < Core.ar_warbondDef.Count; i++)
         {
             var f = Core.ar_faction[i];
-            var lastPrice = WorldComponent_PriceSaveLoad.loadPrice(f, Core.AbsTickGame);
+            var lastPrice = loadPrice(f, Core.AbsTickGame);
             Core.ar_warbondDef[i].SetStatBaseValue(StatDefOf.MarketValue, lastPrice);
         }
     }
@@ -71,12 +75,6 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 
         factionToPriceData.Add(Key, fpdn);
 
-        /*
-            if(t.IsPlayer)
-            {//update for player since it could be renamed
-                factionToPriceData[Key].label = t.GetCallLabel();
-            }
-            */
         return factionToPriceData[Key];
     }
 
@@ -108,16 +106,10 @@ public class WorldComponent_PriceSaveLoad : WorldComponent
 
 
             float ticksNow = Core.AbsTickGame;
-            /*
-                foreach(Faction f in Find.FactionManager.AllFactions)
-                {
-                    savePrice(f, ticksNow, 0);
-                }
-                */
             foreach (var f in from f in DefDatabase<FactionDef>.AllDefs
-                              where
-                                  Core.isWarbondFaction(f)
-                              select f)
+                     where
+                         Core.isWarbondFaction(f)
+                     select f)
             {
                 if (RimstocksMod.use_rimwar)
                 {

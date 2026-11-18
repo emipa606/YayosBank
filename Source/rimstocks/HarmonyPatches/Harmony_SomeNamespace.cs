@@ -49,7 +49,7 @@ public static class Harmony_SomeNamespace
 
     public static void DoWindowContentsPostFix(Rect rect, ref FloatRange ___graphSection)
     {
-        if ((byte)CurTabAccessor.GetValue(null) != RimstocksMod.ExtraHistoryTabIndex)
+        if ((byte)(CurTabAccessor.GetValue(null) ?? 0) != RimstocksMod.ExtraHistoryTabIndex)
         {
             return;
         }
@@ -99,14 +99,13 @@ public static class Harmony_SomeNamespace
             delegate
             {
                 CurTabAccessor.SetValue(null, (byte)2, BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == 2));
+            }, () => (byte)(CurTabAccessor.GetValue(null) ?? 0) == 2));
         list.Add(new TabRecord("warbond_graphTitle".Translate(),
             delegate
             {
                 CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex,
                     BindingFlags.NonPublic | BindingFlags.Static, null, null);
-            }, () => (byte)CurTabAccessor.GetValue(null) == RimstocksMod.ExtraHistoryTabIndex));
-        //CurTabAccessor.SetValue(null, (byte)RimstocksMod.ExtraHistoryTabIndex, BindingFlags.NonPublic | BindingFlags.Static, null, null);
+            }, () => (byte)(CurTabAccessor.GetValue(null) ?? 0) == RimstocksMod.ExtraHistoryTabIndex));
     }
 
     public static IEnumerable<CodeInstruction> graphTranspiler(IEnumerable<CodeInstruction> instructions)

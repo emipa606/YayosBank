@@ -1,10 +1,10 @@
-﻿using HarmonyLib;
-using RimWorld;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
-using UnityEngine;
+using HarmonyLib;
 using Mlie;
+using UnityEngine;
 using Verse;
 
 namespace rimstocks;
@@ -28,7 +28,7 @@ public class RimstocksMod : Mod
     public static float priceEvent_multiply;
     public static float rimwarPriceFactor;
     public static float sellPrice;
-    public static RimstocksModSettings SettingsInstance;
+    private static RimstocksModSettings SettingsInstance;
 
     // Keep your public static fields so other code referencing them remains identical.
     public static bool useEnemyFaction;
@@ -58,14 +58,19 @@ public class RimstocksMod : Mod
         // Initialize static values from settings immediately
         ApplySettingsToStatics();
 
-        new Harmony("yayo.rimstocks.1").PatchAll();
+        new Harmony("yayo.rimstocks.1").PatchAll(Assembly.GetExecutingAssembly());
     }
 
-    private void ApplySettingsToStatics()
+    // 'use_rimwar' property
+    public static bool use_rimwar => exist_rimWar && rimwarLink;
+
+    private static void ApplySettingsToStatics()
     {
         // copy settings into static fields so other code that depends on them continues to work
         if (SettingsInstance == null)
+        {
             return;
+        }
 
         useEnemyFaction = SettingsInstance.useEnemyFaction;
         useVanillaEnemyFaction = SettingsInstance.useVanillaEnemyFaction;
@@ -111,62 +116,77 @@ public class RimstocksMod : Mod
             {
                 SettingsInstance.useEnemyFaction = bool.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "ExtraHistoryTabIndex")
             {
-                RimstocksMod.ExtraHistoryTabIndex = int.Parse(modSetting.Value);
+                ExtraHistoryTabIndex = int.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "useVanillaEnemyFaction")
             {
                 SettingsInstance.useVanillaEnemyFaction = bool.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "rimwarLink")
             {
                 SettingsInstance.rimwarLink = bool.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "rimwarPriceFactor")
             {
                 SettingsInstance.rimwarPriceFactor = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "sellPrice")
             {
                 SettingsInstance.sellPrice = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "dividendPer")
             {
                 SettingsInstance.dividendPer = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "maxReward")
             {
                 SettingsInstance.maxReward = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "DelistingPrice")
             {
                 SettingsInstance.DelistingPrice = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "limitDate")
             {
                 SettingsInstance.limitDate = int.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "militaryAid_cost")
             {
                 SettingsInstance.militaryAid_cost = int.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "militaryAid_multiply")
             {
                 SettingsInstance.militaryAid_multiply = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "priceEvent_multiply")
             {
                 SettingsInstance.priceEvent_multiply = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "loanDate")
             {
                 SettingsInstance.loanDate = int.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "loanPer")
             {
                 SettingsInstance.loanPer = float.Parse(modSetting.Value);
             }
+
             if (modSetting.Name == "loanScale")
             {
                 SettingsInstance.loanScale = int.Parse(modSetting.Value);
@@ -174,17 +194,17 @@ public class RimstocksMod : Mod
         }
 
         SettingsInstance.Write();
-        xml.Root.Element(modNodeName)?.Remove();
+        xml.Root?.Element(modNodeName)?.Remove();
         xml.Save(hugsLibConfig);
         //Statics applied right after this in constructor
         Log.Message($"[{modNodeName}]: Imported old HugLib-settings");
     }
 
-    public override void DoSettingsWindowContents(UnityEngine.Rect inRect)
+    public override void DoSettingsWindowContents(Rect inRect)
     {
-        Listing_Standard listing = new Listing_Standard();
+        var listing = new Listing_Standard();
         listing.Begin(inRect);
-        listing.ColumnWidth = inRect.width / 2 - 16f;
+        listing.ColumnWidth = (inRect.width / 2) - 16f;
 
 
         // Section 1: simple booleans / restart-required items
@@ -210,10 +230,11 @@ public class RimstocksMod : Mod
             null,
             1f);
 
-        listing.Gap(12f);
+        listing.Gap();
 
         // RimWar link and factor
-        listing.CheckboxLabeled("rimwarLink.t".Translate(), ref SettingsInstance.rimwarLink, "rimwarLink.d".Translate());
+        listing.CheckboxLabeled("rimwarLink.t".Translate(), ref SettingsInstance.rimwarLink,
+            "rimwarLink.d".Translate());
         listing.Label(
             "rimwarPriceFactor.t".Translate() + ": " + SettingsInstance.rimwarPriceFactor.ToString("0.##"),
             tooltip: "rimwarPriceFactor.t".Translate());
@@ -223,11 +244,9 @@ public class RimstocksMod : Mod
             0f,
             2f,
             true,
-            SettingsInstance.rimwarPriceFactor.ToString("0.##"),
-            null,
-            null);
+            SettingsInstance.rimwarPriceFactor.ToString("0.##"));
 
-        listing.Gap(12f);
+        listing.Gap();
 
         // Price & dividend settings
         listing.Label("sellPrice.t".Translate() + ": " + SettingsInstance.sellPrice.ToString("0.00"));
@@ -237,11 +256,9 @@ public class RimstocksMod : Mod
             0.01f,
             1f,
             true,
-            SettingsInstance.sellPrice.ToString("0.00"),
-            null,
-            null);
+            SettingsInstance.sellPrice.ToString("0.00"));
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label(
             "dividendPer.t".Translate() + ": " + SettingsInstance.dividendPer.ToString("0.00"),
             tooltip: "dividendPer.t".Translate());
@@ -251,11 +268,9 @@ public class RimstocksMod : Mod
             0f,
             5f,
             true,
-            SettingsInstance.dividendPer.ToString("0.00"),
-            null,
-            null);
+            SettingsInstance.dividendPer.ToString("0.00"));
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label(
             "maxReward.t".Translate() + ": " + SettingsInstance.maxReward.ToString("0"),
             tooltip: "maxReward.d".Translate());
@@ -265,11 +280,9 @@ public class RimstocksMod : Mod
             0f,
             500000f,
             true,
-            SettingsInstance.maxReward.ToString("0"),
-            null,
-            null);
+            SettingsInstance.maxReward.ToString("0"));
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label(
             "DelistingPrice.t".Translate() + ": " + SettingsInstance.DelistingPrice.ToString("0"),
             tooltip: "DelistingPrice.d".Translate());
@@ -279,9 +292,7 @@ public class RimstocksMod : Mod
             1f,
             1000f,
             true,
-            SettingsInstance.DelistingPrice.ToString("0"),
-            null,
-            null);
+            SettingsInstance.DelistingPrice.ToString("0"));
 
         listing.NewColumn();
 
@@ -295,11 +306,9 @@ public class RimstocksMod : Mod
             0f,
             100f,
             true,
-            SettingsInstance.militaryAid_cost.ToString(),
-            null,
-            null);
+            SettingsInstance.militaryAid_cost.ToString());
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label(
             "militaryAid_multiply.t".Translate() + ": " + SettingsInstance.militaryAid_multiply.ToString("0.##"),
             tooltip: "militaryAid_multiply.d".Translate());
@@ -309,11 +318,9 @@ public class RimstocksMod : Mod
             0f,
             10f,
             true,
-            SettingsInstance.militaryAid_multiply.ToString("0.##"),
-            null,
-            null);
+            SettingsInstance.militaryAid_multiply.ToString("0.##"));
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label(
             "priceEvent_multiply.t".Translate() + ": " + SettingsInstance.priceEvent_multiply.ToString("0.##"),
             tooltip: "priceEvent_multiply.d".Translate());
@@ -323,11 +330,9 @@ public class RimstocksMod : Mod
             0f,
             10f,
             true,
-            SettingsInstance.priceEvent_multiply.ToString("0.##"),
-            null,
-            null);
+            SettingsInstance.priceEvent_multiply.ToString("0.##"));
 
-        listing.Gap(12f);
+        listing.Gap();
 
         // Loans
         listing.Label("loanDate.t".Translate() + ": " + SettingsInstance.loanDate);
@@ -337,11 +342,9 @@ public class RimstocksMod : Mod
             1f,
             3650f,
             true,
-            SettingsInstance.loanDate.ToString(),
-            null,
-            null);
+            SettingsInstance.loanDate.ToString());
 
-        listing.Gap(12f);
+        listing.Gap();
         listing.Label("loanPer.t".Translate() + ": " + SettingsInstance.loanPer.ToString("0.00"));
         SettingsInstance.loanPer = Widgets.HorizontalSlider(
             listing.GetRect(22f),
@@ -349,23 +352,20 @@ public class RimstocksMod : Mod
             0f,
             1f,
             true,
-            SettingsInstance.loanPer.ToString("0.00"),
-            null,
-            null);
+            SettingsInstance.loanPer.ToString("0.00"));
 
-        listing.Gap(12f);
-        listing.Label("loanScale.t".Translate() + ": " + SettingsInstance.loanScale, tooltip: "loanScale.d".Translate());
+        listing.Gap();
+        listing.Label("loanScale.t".Translate() + ": " + SettingsInstance.loanScale,
+            tooltip: "loanScale.d".Translate());
         SettingsInstance.loanScale = (int)Widgets.HorizontalSlider(
             listing.GetRect(22f),
             SettingsInstance.loanScale,
             0f,
             1000000f,
             true,
-            SettingsInstance.loanScale.ToString(),
-            null,
-            null);
+            SettingsInstance.loanScale.ToString());
 
-        listing.Gap(12f);
+        listing.Gap();
         if (listing.ButtonText("YayosBank_ResetYayosBank_ResetToDefault".Translate()))
         {
             SettingsInstance.useEnemyFaction = false;
@@ -398,7 +398,10 @@ public class RimstocksMod : Mod
         listing.End();
     }
 
-    public override string SettingsCategory() { return "YayosBank_ModName".Translate(); }
+    public override string SettingsCategory()
+    {
+        return "YayosBank_ModName".Translate();
+    }
 
     public override void WriteSettings()
     {
@@ -410,7 +413,4 @@ public class RimstocksMod : Mod
         // Call Core.patchIncident() to replicate old behaviour when settings changed
         Core.patchIncident();
     }
-
-    // 'use_rimwar' property
-    public static bool use_rimwar => exist_rimWar && rimwarLink;
 }

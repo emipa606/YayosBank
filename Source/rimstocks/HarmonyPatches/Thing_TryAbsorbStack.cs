@@ -5,7 +5,7 @@ using Verse;
 namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(Thing), nameof(Thing.TryAbsorbStack))]
-internal class Thing_TryAbsorbStack
+internal static class Thing_TryAbsorbStack
 {
     public static void Prefix(Thing __instance, Thing other, bool respectStackLimit)
     {
@@ -24,7 +24,5 @@ internal class Thing_TryAbsorbStack
         var num = ThingUtility.TryAbsorbStackNumToTake(__instance, other, respectStackLimit);
         cp.age = Mathf.CeilToInt(((cp.age * __instance.stackCount) + (cp_other.age * num)) /
                                  (float)(__instance.stackCount + num));
-
-        return;
     }
 }

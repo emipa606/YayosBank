@@ -6,7 +6,7 @@ public class RimstocksModSettings : ModSettings
 {
     public float DelistingPrice = 100f;
     public float dividendPer = 0.08f;
-    public int limitDate = 0;
+    public int limitDate;
 
     public int loanDate = 60;
     public float loanPer = 0.05f;
@@ -21,9 +21,10 @@ public class RimstocksModSettings : ModSettings
     public float rimwarPriceFactor = 0.33f;
 
     public float sellPrice = 0.92f;
+
     // default values chosen to match your previous defaults
-    public bool useEnemyFaction = false;
-    public bool useVanillaEnemyFaction = false;
+    public bool useEnemyFaction;
+    public bool useVanillaEnemyFaction;
 
     public override void ExposeData()
     {

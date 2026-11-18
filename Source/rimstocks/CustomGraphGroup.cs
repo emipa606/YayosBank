@@ -7,10 +7,10 @@ namespace rimstocks;
 
 public class CustomGraphGroup
 {
-    private int cachedGraphTickCount = -1;
     private readonly List<SimpleCurveDrawInfo> curves = [];
+    private int cachedGraphTickCount = -1;
 
-    public static void DrawCurves(Rect rect, List<SimpleCurveDrawInfo> curves, SimpleCurveDrawerStyle style = null,
+    private static void DrawCurves(Rect rect, List<SimpleCurveDrawInfo> curves, SimpleCurveDrawerStyle style = null,
         Rect legendRect = default)
     {
         if (Event.current.type != EventType.Repaint)
@@ -114,7 +114,7 @@ public class CustomGraphGroup
         }
     }
 
-    public static void DrawCurvesLegend(Rect rect)
+    private static void DrawCurvesLegend(Rect rect)
     {
         Text.Anchor = TextAnchor.UpperLeft;
         Text.Font = GameFont.Small;

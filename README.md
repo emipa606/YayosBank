@@ -5,6 +5,8 @@
 Update of YAYO, Amnabis mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2368878128
 
+- As of 1.6 there is no need for HugsLib, thanks to Zaljerem!
+
 ![Image](https://img.litet.net/logos/Notice.png)
 	
 ![Image](https://img.litet.net/logos/OriginalDescription.png)
@@ -92,4 +94,4 @@ tag : cash, money, stock, stonk
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/YayosBank?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2888738292) | tags:  economics
+[![Image](https://img.shields.io/github/v/release/emipa606/YayosBank?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2888738292) | economics

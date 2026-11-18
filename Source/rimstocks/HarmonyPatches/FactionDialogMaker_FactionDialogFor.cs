@@ -5,9 +5,9 @@ using Verse;
 namespace rimstocks.HarmonyPatches;
 
 [HarmonyPatch(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor))]
-internal class FactionDialogMaker_FactionDialogFor
+internal static class FactionDialogMaker_FactionDialogFor
 {
-    private static void Postfix(ref DiaNode __result, Pawn negotiator, Faction faction)
+    public static void Postfix(ref DiaNode __result, Pawn negotiator, Faction faction)
     {
         DiaOption opt;
         // 대출

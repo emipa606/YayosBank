@@ -6,4 +6,18 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="rimstocks/rimstocks.csproj" />
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Keys.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/">
+    <File Path="../1.7/Defs/categories.xml" />
+    <File Path="../1.7/Defs/event.xml" />
+    <File Path="../1.7/Defs/UpdateInfo.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Patches/">
+    <File Path="../1.7/Patches/TraderkindPatch.xml" />
+  </Folder>
 </Solution>

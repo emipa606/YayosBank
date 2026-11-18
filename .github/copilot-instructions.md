@@ -1,49 +1,121 @@
-# GitHub Copilot Instructions for Yayo's Bank (Continued)
+# GitHub Copilot Instructions for Yayo's Bank (Continued) Mod
+
+Welcome to the GitHub Copilot instructions for Yayo's Bank (Continued), a RimWorld mod that provides a dynamic banking system, including loans, war bonds, and economic incidents. Below are guidelines to help you navigate the codebase and contribute effectively.
 
 ## Mod Overview and Purpose
-Yayo's Bank (Continued) is an economic-themed mod for RimWorld, originally created by YAYO and updated by Amnabis. The mod introduces complex economic systems where players can engage in financial activities with in-game factions, such as loans and war bonds. The mod is designed to add depth to the economic interactions within the game, offering players unique challenges and opportunities involving faction relations and financial management.
+
+**Mod Name:** Yayo's Bank (Continued)  
+**Author:** YAYO, Amnabi  
+**PackageId:** Mlie.YayosBank  
+**Description:**  
+This mod updates the original YAYO mod and introduces a comprehensive banking system to RimWorld. Players can take loans from factions, face consequences if they can't repay in time, and engage with war bonds that can be sold or used for military aid. The mod includes a dynamic economy with economic incidents and a system for dividend arrivals and bond price changes based on quest success.
 
 ## Key Features and Systems
-- **Loan System**: Players can take out loans from factions. Failure to repay loans with interest may result in hostile actions from the lender, including creditor raids.
-  
-- **War Bonds**: Factions sell war bonds, whose prices fluctuate over time. Bonds can be used to request military aid or held onto for item rewards. Players can benefit from economic incidents affecting bond prices.
 
-- **Economic Incidents**:
-  - Loan increases due to interest
-  - Seizure bankruptcy
-  - Creditor raids
-  - Dividend arrivals, represented by items in drop pods every quarter
-  - Bond price changes influenced by quest success
-
-- **Bonds Utilization**: Use bonds to receive quarterly gifts from factions or request military aid. Bonds can be sold at a profit when their price rises.
+- **Loans:** Players can request loans from factions with a risk of attack if the debt is not repaid on time.
+- **War Bonds:** Factions sell war bonds, which fluctuate in price and can be used for military aid or profit.
+- **Economic Incidents:** Events like loan increases, bankruptcy, and creditor raids add depth to the economic system.
+- **Dividend Arrivals:** Players receive items as dividends every quarter if they hold bonds.
+- **Delisting:** Bonds are delisted if their price falls below $100.
+- **Bond Price Changes:** Prices fluctuate based on quest success, creating a dynamic market.
 
 ## Coding Patterns and Conventions
-- **C# Structure**: The mod follows typical C# object-oriented design principles using classes and methods to encapsulate functionality.
-- **Naming Conventions**: CamelCase is used for public class names and methods. Internal classes and methods use a similar naming convention with appropriate access modifiers.
-  
-- **File Organization**: Source code is organized into specific files for different functionalities such as faction dialogues, harmony patches, quest handling, etc.
+
+- **Coding Language:** C#
+- **Framework:** RimWorld modding framework
+- **Libraries:** Harmony, HugsLib
+- **Structure:** The codebase is organized into folders for different aspects of the mod, such as XML definitions, Harmony patches, and utility classes.
+
+### Directory Structure
+
+- **Source/rimstocks/**: Contains the main C# code.
+  - **FactionData.cs**: Manages faction data.
+  - **CustomGraphGroup.cs**: Handles custom graph rendering.
+  - **FactionPriceData.cs**: Manages faction price data.
+  - **HarmonyPatches/**: Contains Harmony patches for RimWorld.
+- **1.7/Defs/**: Contains XML definitions for mod elements.
+- **1.7/Patches/**: Contains XML patches for RimWorld.
+
+### Naming Conventions
+
+- **Classes:** PascalCase (e.g., `FactionData`, `CustomGraphGroup`)
+- **Methods and Variables:** camelCase (e.g., `clear()`, `ExposeData`)
+- **Constants:** UPPERCASE (e.g., `MAX_LOAN_AMOUNT`)
 
 ## XML Integration
-- XML is used for defining the mod's static data, such as item definitions, events, and interactions with RimWorld's core systems. Ensure proper syntax and adherence to RimWorld’s expected data structure for seamless integration.
+
+Yayo's Bank (Continued) heavily relies on XML for defining game elements. Here’s how to work with XML files:
+
+- **Structure:** Each XML file defines specific game elements like `ThingCategoryDef`, `GameConditionDef`, `IncidentDef`, and `letterDef`.
+- **Naming:** Use descriptive names for XML elements to ensure clarity.
+- **Location:** Place XML files in the appropriate directories within the mod folder.
+
+### Example XML Definition
+
+xml
+<ThingCategoryDef Name="BankItems">
+  <label>Bank Items</label>
+  <parentName>Items</parentName>
+  <thingCategories>
+    <li>Money</li>
+    <li>Bonds</li>
+  </thingCategories>
+</ThingCategoryDef>
+
 
 ## Harmony Patching
-- **Harmony Patches**: Utilized in `Harmony_SomeNamespace.cs`, this mod employs Harmony for patching existing game methods to inject additional functionality or modify behaviors at runtime.
-- **Method Prefix/Postfix**: Use prefixes to inject logic before a method executes, and postfixes to modify behavior after a method runs.
+
+Harmony is a powerful tool for modding RimWorld, allowing you to modify the game's behavior without altering the original code. Here’s how to use Harmony patches in Yayo's Bank (Continued):
+
+- **Patch Location:** Harmony patches are located in the `Source/rimstocks/HarmonyPatches/` directory.
+- **Patch Types:** Prefixes and postfixes are used to modify method behavior before or after the original code.
+- **Example Patch:**
+
+csharp
+[HarmonyPatch(typeof(FactionDialogMaker), "FactionDialogFor")]
+public static class FactionDialogMaker_FactionDialogFor
+{
+    public static void Postfix(Faction faction, ref Dialog_Option[] __result)
+    {
+        // Add custom options to the faction dialog
+        var newOption = new Dialog_Option("Request Loan", () =>
+        {
+            // Loan request logic
+        });
+        List<Dialog_Option> options = new List<Dialog_Option>(__result);
+        options.Add(newOption);
+        __result = options.ToArray();
+    }
+}
+
 
 ## Suggestions for Copilot
-1. **Automatic Naming Suggestions**: When declaring new classes or methods, Copilot can suggest meaningful names based on their roles within the mod.
-2. **XML Template Generation**: Suggest XML templates based on defined C# objects to ensure seamless data integration.
-3. **Code Completion**: Assist with code completion while writing complex economic logic or implementing harmony patches.
-4. **Error Prevention**: Provide suggestions to prevent common errors in RimWorld modding, such as handling null references or incorrect XML schema usage.
-5. **Documentation Enhancements**: Encourage inline comments and summaries for public methods to maintain comprehensive documentation.
 
-## Author's Note
-Feel free to modify and expand upon this mod. The source code is included for developers to experiment with and create new variations. If you're interested in contributing or discussing ideas, you’re encouraged to reach out via the RimWorld Discord.
+1. **Code Completion:** Use Copilot to complete methods, classes, and XML elements based on the existing codebase.
+2. **Harmony Patches:** Generate Harmony patches for existing RimWorld methods using Copilot.
+3. **XML Definitions:** Create new XML definitions for new game elements, such as new item categories or incidents.
+4. **Error Handling:** Implement error handling in C# code to manage potential issues, especially during debt repayment or bond transactions.
 
-## Support and Troubleshooting
-- Use the Log Uploader for error logs.
-- For support, utilize the designated Discord channel rather than GitHub discussions for timely assistance.
-- If you discover a solution to a problem, contribute by posting it to the GitHub repository.
-- Organize your mods with RimSort for optimal performance and compatibility. 
+## Contributing Guidelines
 
-Tags: cash, money, stock, stonk, economics
+- **Testing:** Ensure your changes do not break existing functionality. Use RimSort to manage mod dependencies.
+- **Documentation:** Update the README or create new documentation if you add new features.
+- **Reporting Issues:** Report errors using the Discord channel for support, providing logs using the Log Uploader.
+
+Feel free to modify and expand the mod. Your contributions are highly appreciated!
+
+## Project Solution Guidelines
+- Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
+- Use these in-solution XML files as the primary files for reference and modification.
+- The `.github/copilot-instructions.md` file is included in the solution under the `.github` solution folder, so it should be read/modified from within the solution instead of using paths outside the solution. Update this file once only, as it and the parent-path solution reference point to the same file in this workspace.
+- When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
+- In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
+- For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
+
+
+## Hard rules (must follow)
+- Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
+- Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+- When mentioning SonarQube issues, automatically use the SonarQube MCP service to fetch and address issues instead of making inferred fixes without querying SonarQube first.
+- When mentioning the rimworld log, automatically use the Rimworld MCP service to fetch the log.
+

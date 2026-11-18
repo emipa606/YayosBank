@@ -6,9 +6,9 @@ namespace rimstocks.HarmonyPatches;
 
 // 퀘스트 완료 시 주가변동
 [HarmonyPatch(typeof(Quest), nameof(Quest.End))]
-internal class Quest_End
+internal static class Quest_End
 {
-    private static void Postfix(Quest __instance, QuestEndOutcome outcome)
+    public static void Postfix(Quest __instance, QuestEndOutcome outcome)
     {
         FactionDef f = null;
         FactionDef f2 = null;
@@ -24,35 +24,35 @@ internal class Quest_End
                 switch (p)
                 {
                     case QuestPart_SpawnWorldObject o:
+                    {
+                        if (o.worldObject.def == WorldObjectDefOf.Site && o.worldObject.Faction != null)
                         {
-                            if (o.worldObject.def == WorldObjectDefOf.Site && o.worldObject.Faction != null)
-                            {
-                                f2 = o.worldObject.Faction.def;
-                            }
-
-                            break;
+                            f2 = o.worldObject.Faction.def;
                         }
+
+                        break;
+                    }
                     case QuestPart_Incident p2:
+                    {
+                        if (p2.incident == IncidentDefOf.RaidEnemy)
                         {
-                            if (p2.incident == IncidentDefOf.RaidEnemy)
-                            {
-                                f2 = __instance.InvolvedFactions.ToList()[0].def;
-                            }
-
-                            break;
+                            f2 = __instance.InvolvedFactions.ToList()[0].def;
                         }
+
+                        break;
+                    }
                     default:
+                    {
+                        if (p is not QuestPart_InvolvedFactions)
                         {
-                            if (p is not QuestPart_InvolvedFactions)
+                            if (p.InvolvedFactions.Any())
                             {
-                                if (p.InvolvedFactions.Any())
-                                {
-                                    f = p.InvolvedFactions.ToList()[0].def;
-                                }
+                                f = p.InvolvedFactions.ToList()[0].def;
                             }
-
-                            break;
                         }
+
+                        break;
+                    }
                 }
             }
         }
