@@ -1,5 +1,9 @@
 # Changelog for YayosBank
 
+1.7.1 - Fixed Korean translation
+Used DeepL to update translations for Korean (한국어)
+
+
 1.7.0 - Mod updated for 1.7 and passed autotests
 
 
